@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epipolar Geometry - Comprehensive Notes</title>
+    
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError : false
+        });"></script>
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #ffffff;
+            --text-color: #333;
+            --border-color: #eee;
+        }
+        
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 30px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            background: var(--bg-color);
+            padding: 60px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        
+        h1 { border-bottom: 3px solid var(--accent-color); padding-bottom: 15px; font-size: 2.5em; }
+        h2 { border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 2em; }
+        
+        table { 
+            width: 100%;
+            border-collapse: collapse; 
+            margin: 25px 0; 
+            font-size: 0.95em;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        
+        th, td { 
+            border: 1px solid #dfe6e9; 
+            padding: 15px; 
+            text-align: left; 
+        }
+        
+        th { 
+            background-color: #f8f9fa; 
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        tr:nth-child(even) { background-color: #fafafa; }
+        tr:hover { background-color: #f1f1f1; }
+        
+        code {
+            background-color: #f1f2f6;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.45;
+        }
+        
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        blockquote {
+            margin: 25px 0;
+            padding: 15px 25px;
+            border-left: 5px solid var(--accent-color);
+            background-color: #f0f7fd;
+            font-style: italic;
+        }
+        
+        hr { 
+            border: none; 
+            border-top: 1px solid var(--border-color); 
+            margin: 40px 0; 
+        }
+        
+        .katex-display {
+            margin: 25px 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 10px 0;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 40px;
+        }
+        
+        .toc ul { list-style-type: none; padding-left: 20px; }
+        .toc a { text-decoration: none; color: var(--accent-color); }
+        .toc a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Here are the complete, comprehensive notes on Epipolar Geometry.</p>
+<hr />
+<h1 id="epipolar-geometry-complete-notes">Epipolar Geometry — Complete Notes</h1>
+<p><strong>Course:</strong> EE5178 — Modern Computer Vision
+<em>Adapted from lectures by Rob Fergus (NYU) and Ioannis Gkioulekas (CMU)</em></p>
+<hr />
+<h2 id="1-motivation-stereo-reconstruction">1. Motivation: Stereo Reconstruction</h2>
+<p>The goal of two-view geometry is to recover <strong>3D structure and shape</strong> from two images of the same scene. Given two cameras viewing the same scene, the output is the 3D positions of scene points — a process called <strong>stereo reconstruction</strong>. <a href="https://learnopencv.com/introduction-to-epipolar-geometry-and-stereo-vision/">learnopencv</a></p>
+<p>The two images can arise from:
+- A <strong>stereo rig</strong> — two cameras capturing the scene simultaneously
+- A <strong>single moving camera</strong> — two frames of a static scene captured sequentially</p>
+<p>These scenarios are <strong>geometrically equivalent</strong>. The basic reconstruction principle is <strong>triangulation</strong>: find the 3D point at the intersection of the two back-projected rays, one from each camera.</p>
+<p><strong>Two-step algorithm:</strong>
+1. For each point in image 1, find the corresponding point in image 2 — <em>(search problem)</em>
+2. For each matched pair, compute the 3D point by triangulation — <em>(estimation problem)</em></p>
+<p>Finding correspondences naively is a <strong>2D search</strong> across the entire second image. Epipolar geometry reduces this to a <strong>1D search along a line</strong>, called the epipolar line.</p>
+<hr />
+<h2 id="2-notation">2. Notation</h2>
+<p>Two cameras <strong>P</strong> and <strong>P′</strong> project 3D point <strong>X</strong> to image points:</p>
+<p>[\mathbf{x} = P\mathbf{X}, \qquad \mathbf{x}' = P'\mathbf{X}]</p>
+<ul>
+<li><strong>P</strong>, <strong>P′</strong> — 3×4 camera matrices</li>
+<li><strong>X</strong> — homogeneous 4-vector (3D point)</li>
+<li><strong>x</strong>, <strong>x′</strong> — homogeneous 3-vectors (2D image points)</li>
+</ul>
+<blockquote>
+<p><strong>Convention:</strong> All equations with homogeneous coordinates hold <em>up to scale</em> — equality means equal up to a non-zero scalar multiple.</p>
+</blockquote>
+<hr />
+<h2 id="3-epipolar-geometry">3. Epipolar Geometry</h2>
+<h3 id="31-core-idea">3.1 Core Idea</h3>
+<p>Given a point <strong>x</strong> in image 1, the corresponding 3D scene point lies somewhere along the ray back-projected through <strong>x</strong>. This entire ray, projected into image 2, sweeps out a <strong>line</strong> — called the <strong>epipolar line l′</strong>. The corresponding point <strong>x′</strong> must lie somewhere on this line. <a href="https://sites.ecse.rpi.edu/~qji/CV/epipolar_fundF.pdf">sites.ecse.rpi</a></p>
+<p><strong>Epipolar constraint:</strong> Reduces correspondence search from 2D → <strong>1D along the epipolar line.</strong></p>
+<h3 id="32-key-definitions">3.2 Key Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Epipole e</strong></td>
+<td>Projection of camera 2's centre C′ into image 1; equivalently, where the baseline pierces image 1</td>
+</tr>
+<tr>
+<td><strong>Epipole e′</strong></td>
+<td>Projection of camera 1's centre C into image 2</td>
+</tr>
+<tr>
+<td><strong>Baseline</strong></td>
+<td>Line joining the two camera centres C and C′</td>
+</tr>
+<tr>
+<td><strong>Epipolar line l′</strong></td>
+<td>Line in image 2 corresponding to point <strong>x</strong> in image 1</td>
+</tr>
+<tr>
+<td><strong>Epipolar plane</strong></td>
+<td>Plane containing C, C′, and the 3D point X — these three points are always coplanar</td>
+</tr>
+<tr>
+<td><strong>Epipolar pencil</strong></td>
+<td>One-parameter family of epipolar planes as X varies; all epipolar lines in each image converge at the epipole</td>
+</tr>
+<tr>
+<td>### 3.3 Image Centre vs. Epipole</td>
+<td></td>
+</tr>
+<tr>
+<td>These are two different concepts that happen to coincide in one special case:</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Image centre (principal point):</strong> Where the optical axis hits the sensor — fixed hardware property, always at roughly the geometric centre of the image.</li>
+<li><strong>Epipole:</strong> Projection of the <em>other camera's centre</em> — can be anywhere, including outside the image boundary.</li>
+</ul>
+<p>They coincide only for <strong>pure forward translation</strong>, where the baseline is aligned with the optical axis (Section 6.2). <a href="https://sanyamkapoor.com/kb/an-introduction-to-epipolar-geometry/">sanyamkapoor</a></p>
+<h3 id="34-the-epipolar-pencil">3.4 The Epipolar Pencil</h3>
+<p>As 3D point X moves along the back-projected ray, the epipolar plane <strong>rotates about the baseline</strong>, generating a family of planes — the <strong>epipolar pencil</strong>. Two critical consequences:
+- Every epipolar line in image 1 passes through <strong>e</strong>
+- Every epipolar line in image 2 passes through <strong>e′</strong></p>
+<hr />
+<h2 id="4-the-fundamental-matrix">4. The Fundamental Matrix</h2>
+<h3 id="41-algebraic-setup">4.1 Algebraic Setup</h3>
+<p>The mapping (\mathbf{x} \rightarrow \mathbf{l}') depends only on the cameras P and P′, not on scene structure. It is <strong>linear</strong> and encoded by a single 3×3 matrix <strong>F</strong>: <a href="https://en.wikipedia.org/wiki/Fundamental_matrix_(computer_vision)">en.wikipedia</a></p>
+<p>[\mathbf{l}' = F\mathbf{x}]</p>
+<p>If <strong>x</strong> and <strong>x′</strong> are corresponding points, then <strong>x′</strong> lies on <strong>l′</strong>, giving:</p>
+<p>[\boxed{\mathbf{x}'^T F \mathbf{x} = 0}]</p>
+<p>This is the <strong>fundamental epipolar constraint</strong> — the central equation of two-view geometry.</p>
+<h3 id="42-derivation-of-f-three-steps">4.2 Derivation of F (Three Steps)</h3>
+<p>Choose cameras with the first camera at the world origin:</p>
+<p>[P = K[I\,|\,\mathbf{0}], \qquad P' = K'[R\,|\,\mathbf{t}]]</p>
+<p>where K, K′ are intrinsic matrices, R is rotation, <strong>t</strong> is translation from camera 1 to camera 2.</p>
+<hr />
+<p><strong>Step 1 — Back-project a ray from x using K⁻¹</strong></p>
+<p>The 3D point at depth (z) on the ray through pixel <strong>x</strong> is:</p>
+<p>[\mathbf{X}(z) = \begin{pmatrix} z K^{-1}\mathbf{x} \ 1 \end{pmatrix}]</p>
+<p>Applying K⁻¹ removes intrinsic camera distortion (focal length, pixel scaling) and recovers the pure 3D direction. Think of K as the map from 3D directions → pixels; K⁻¹ reverses it.</p>
+<hr />
+<p><strong>Step 2 — Pick two convenient points on the ray and project into image 2</strong></p>
+<p>Rather than tracking a general depth-z point, pick the two most convenient points:</p>
+<table>
+<thead>
+<tr>
+<th>Point on ray</th>
+<th>Depth</th>
+<th>3D form</th>
+<th>Projects to image 2 as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera centre C</td>
+<td>(z=0)</td>
+<td>((\mathbf{0},\,1)^T)</td>
+<td>(\mathbf{p} = K'\mathbf{t}) — this is the <strong>epipole e′</strong></td>
+</tr>
+<tr>
+<td>Point at infinity</td>
+<td>(z=\infty)</td>
+<td>((K^{-1}\mathbf{x},\,0)^T)</td>
+<td>(\mathbf{q} = K'RK^{-1}\mathbf{x})</td>
+</tr>
+</tbody>
+</table>
+<p>The camera centre of camera 1, viewed from camera 2, is always the epipole — this is the geometric definition of e′. The point at infinity on the ray carries the direction information.</p>
+<hr />
+<p><strong>Step 3 — Compute line through p and q using the cross product</strong></p>
+<p>The line through two 2D points is their cross product:</p>
+<p>[\mathbf{l}' = \mathbf{p} \times \mathbf{q} = (K'\mathbf{t}) \times (K'RK^{-1}\mathbf{x})]</p>
+<p>Apply the identity ((M\mathbf{a}) \times (M\mathbf{b}) = M^{-T}(\mathbf{a} \times \mathbf{b})):</p>
+<p>[\mathbf{l}' = K'^{-T}\bigl(\mathbf{t} \times (RK^{-1}\mathbf{x})\bigr) = K'^{-T}[\mathbf{t}]_\times R K^{-1}\mathbf{x}]</p>
+<p>Therefore:</p>
+<p>[\boxed{F = K'^{-T}[\mathbf{t}]_\times R K^{-1}}]</p>
+<p><strong>Pipeline in one line:</strong></p>
+<p>[\underbrace{\mathbf{x}}<em>{\text{pixel in cam 1}} \xrightarrow{\;K^{-1}\;} \underbrace{\text{3D ray direction}} \xrightarrow{\;R,\,\mathbf{t}\;} \underbrace{\text{2 projected pts in cam 2}} \xrightarrow{\;\times\;} \underbrace{\mathbf{l}' = F\mathbf{x}}</em>{\text{epipolar line in cam 2}}]</p>
+<h3 id="43-the-cross-product-matrix">4.3 The Cross-Product Matrix</h3>
+<p>The vector cross product (\mathbf{v} \times \mathbf{x}) is equivalent to a matrix multiplication:</p>
+<p>[[\mathbf{v}]<em>\times = \begin{bmatrix} 0 &amp; -v_3 &amp; v_2 \ v_3 &amp; 0 &amp; -v_1 \ -v_2 &amp; v_1 &amp; 0 \end{bmatrix}, \qquad \mathbf{v} \times \mathbf{x} = [\mathbf{v}]</em>\times \mathbf{x}]</p>
+<p>Key property: ([\mathbf{v}]<em>\times \mathbf{v} = \mathbf{0}) (self-annihilation). Also, (\det[\mathbf{v}]</em>\times = 0) always — so it is <strong>always rank 2</strong> for any non-zero <strong>v</strong>.</p>
+<hr />
+<h2 id="5-properties-of-the-fundamental-matrix">5. Properties of the Fundamental Matrix</h2>
+<h3 id="51-full-summary-table">5.1 Full Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rank</strong></td>
+<td>Rank 2; (\det F = 0)</td>
+</tr>
+<tr>
+<td><strong>DOF</strong></td>
+<td>7 degrees of freedom</td>
+</tr>
+<tr>
+<td><strong>Scale</strong></td>
+<td>Homogeneous — defined only up to a scalar multiple</td>
+</tr>
+<tr>
+<td><strong>Point correspondence</strong></td>
+<td>(\mathbf{x}'^T F \mathbf{x} = 0) for all corresponding pairs</td>
+</tr>
+<tr>
+<td><strong>Epipolar line in image 2</strong></td>
+<td>(\mathbf{l}' = F\mathbf{x})</td>
+</tr>
+<tr>
+<td><strong>Epipolar line in image 1</strong></td>
+<td>(\mathbf{l} = F^T\mathbf{x}')</td>
+</tr>
+<tr>
+<td><strong>Epipoles</strong></td>
+<td>(F\mathbf{e} = \mathbf{0}) and (F^T\mathbf{e}' = \mathbf{0})</td>
+</tr>
+<tr>
+<td><strong>Transpose</strong></td>
+<td>(F^T) is the fundamental matrix for the reversed camera pair (P′, P)</td>
+</tr>
+<tr>
+<td>### 5.2 Direction of Mapping</td>
+<td></td>
+</tr>
+<tr>
+<td>F acts as a bridge from camera 1 to camera 2. The output line <strong>always lives in the other camera's image</strong>, not the one where the input point came from:</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Mapping</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(\mathbf{x}) in camera 1</td>
+<td>(F)</td>
+<td>(\mathbf{l}' = F\mathbf{x}) in camera 2</td>
+</tr>
+<tr>
+<td>(\mathbf{x}') in camera 2</td>
+<td>(F^T)</td>
+<td>(\mathbf{l} = F^T\mathbf{x}') in camera 1</td>
+</tr>
+</tbody>
+</table>
+<p>The prime (′) consistently denotes camera 2.</p>
+<h3 id="53-why-f-must-be-rank-2-three-independent-proofs">5.3 Why F Must Be Rank 2 — Three Independent Proofs</h3>
+<p><strong>Proof 1 — Geometric:</strong>
+F maps points to <em>lines</em>, not to arbitrary 3-vectors. A line in homogeneous 2D has 2 degrees of freedom. Rank 2 constrains F's output to a 2D subspace — exactly the space of lines. A rank-3 matrix would allow any arbitrary 3-vector as output, which has no geometric meaning as a line. <a href="https://www.sciencedirect.com/topics/computer-science/epipolar-geometry">sciencedirect</a></p>
+<p><strong>Proof 2 — Null space:</strong>
+The epipole satisfies (F\mathbf{e} = \mathbf{0}) (proven below). A non-zero vector mapping to zero means F has a <strong>non-trivial null space</strong> — only possible if rank &lt; 3. Since exactly one epipole exists, the null space is 1-dimensional, forcing rank exactly 2. If rank were 1, the null space would be 2-dimensional — too many epipoles.</p>
+<p><strong>Proof 3 — From the formula:</strong>
+In (F = K'^{-T}[\mathbf{t}]<em>\times R K^{-1}), the matrix ([\mathbf{t}]</em>\times) is always rank 2 (its determinant is identically zero for any <strong>t</strong>). Surrounding full-rank matrices K′, R, K cannot increase rank beyond the minimum:</p>
+<p>[\text{rank}(F) \leq \text{rank}([\mathbf{t}]_\times) = 2]</p>
+<h3 id="54-why-fmathbfe-mathbf0-and-ftmathbfe-mathbf0">5.4 Why (F\mathbf{e} = \mathbf{0}) and (F^T\mathbf{e}' = \mathbf{0})</h3>
+<p><strong>This is not assumed — it is derived from geometry.</strong></p>
+<p>Every epipolar line (\mathbf{l}' = F\mathbf{x}) passes through <strong>e′</strong> (because every epipolar line in image 2 converges at e′). So:</p>
+<p>[\mathbf{e}'^T \mathbf{l}' = \mathbf{e}'^T (F\mathbf{x}) = 0 \quad \text{for EVERY possible } \mathbf{x}]</p>
+<p>The only way a dot product equals zero for <strong>every</strong> possible <strong>x</strong> is if the multiplier is the zero vector:</p>
+<p>[\mathbf{e}'^T F = \mathbf{0} \;\implies\; F^T\mathbf{e}' = \mathbf{0}]</p>
+<p>By symmetry (swapping camera roles): (F\mathbf{e} = \mathbf{0}).</p>
+<p><strong>Logical chain:</strong></p>
+<ol>
+<li>All epipolar lines (\mathbf{l}') pass through (\mathbf{e}').</li>
+<li>Therefore (\mathbf{e}'^T(F\mathbf{x}) = 0) for all (\mathbf{x}).</li>
+<li>Hence (\mathbf{e}'^T F = \mathbf{0}), so (F^T\mathbf{e}' = \mathbf{0}).</li>
+<li>By symmetry, (F\mathbf{e} = \mathbf{0}).</li>
+</ol>
+<p><strong>Geometric intuition:</strong> The epipole <strong>e</strong> in camera 1 is the projection of the baseline itself. Back-projecting the ray through <strong>e</strong> recovers the baseline — which passes through camera 2's own centre. A line passing through a camera centre projects to the entire image plane, not a single line — hence <strong>e</strong> cannot be assigned a unique epipolar line. Mathematically, "no unique output" = zero vector = null space. <a href="https://sites.ecse.rpi.edu/~qji/CV/epipolar_fundF.pdf">sites.ecse.rpi</a></p>
+<hr />
+<h2 id="6-special-cases">6. Special Cases</h2>
+<h3 id="61-parallel-side-by-side-stereo-rig">6.1 Parallel (Side-by-Side) Stereo Rig</h3>
+<p>Cameras face the same direction, separated horizontally:</p>
+<p>[K = K' = \begin{bmatrix}f&amp;0&amp;0\0&amp;f&amp;0\0&amp;0&amp;1\end{bmatrix}, \quad R = I, \quad \mathbf{t} = \begin{pmatrix}t_x\0\0\end{pmatrix}]</p>
+<p>Computing (F = K'^{-T}[\mathbf{t}]_\times R K^{-1}):</p>
+<p>[F = \frac{t_x}{f^2}\begin{bmatrix}0&amp;0&amp;0\0&amp;0&amp;-1\0&amp;1&amp;0\end{bmatrix} \;\sim\; \begin{bmatrix}0&amp;0&amp;0\0&amp;0&amp;-1\0&amp;1&amp;0\end{bmatrix}]</p>
+<p>The scalar (t_x/f^2) is dropped because F is homogeneous (scale-invariant). The constraint (\mathbf{x}'^T F \mathbf{x} = 0) reduces to (y = y') — <strong>epipolar lines are horizontal scan lines</strong>. The epipole is at infinity in the direction ((1,0,0)^T) — off-screen — as expected when both cameras face the same direction and can never "see" each other's centre.</p>
+<h3 id="62-forward-translating-camera">6.2 Forward Translating Camera</h3>
+<p>Camera moves forward along its optical axis:</p>
+<p>[K = K' = \begin{bmatrix}f&amp;0&amp;0\0&amp;f&amp;0\0&amp;0&amp;1\end{bmatrix}, \quad R = I, \quad \mathbf{t} = \begin{pmatrix}0\0\t_z\end{pmatrix}]</p>
+<p>[F = \frac{t_z}{f^2}\begin{bmatrix}0&amp;-1&amp;0\1&amp;0&amp;0\0&amp;0&amp;0\end{bmatrix} \;\sim\; \begin{bmatrix}0&amp;-1&amp;0\1&amp;0&amp;0\0&amp;0&amp;0\end{bmatrix}]</p>
+<p>Note: (t_z) (magnitude of translation) and (f^2) (pixel-scaling) are both scalars that multiply all entries uniformly. Since F is homogeneous, they carry no geometric information and cancel.</p>
+<p>The epipolar line for any point (\mathbf{x} = (x, y, 1)^T):</p>
+<p>[\mathbf{l}' = F\mathbf{x} = \begin{pmatrix}-y \ x \ 0\end{pmatrix}]</p>
+<p>The third component being 0 means the line <strong>passes through the origin</strong>. The constraint (-yx' + xy' = 0) gives (y'/x' = y/x) — a <strong>radial line emanating from (0,0)</strong>.</p>
+<p><strong>Verifying epipole lies on l′:</strong>
+[(-y)(0) + (x)(0) + (0)(1) = 0 \;\checkmark]</p>
+<p>The epipole ((0,0,1)^T) is the <strong>image centre</strong> — which lies on every radial line.</p>
+<p><strong>Physical meaning:</strong> Moving forward causes all scene objects to flow outward from a central point — the <strong>focus of expansion</strong>. That point is the epipole. Every epipolar line is a radial spoke from the centre. This is exactly what you see driving through a tunnel or flying through space — all motion streaks radiate outward from one point straight ahead.</p>
+<h3 id="63-why-f-has-constant-values-despite-variable-t">6.3 Why F Has Constant Values Despite Variable t</h3>
+<p>Both examples show F with entries like 0, 1, −1 — no (t_x) or (t_z) visible. This is because <strong>F is homogeneous</strong>. The actual computed F is:</p>
+<p>[F = \frac{t_z}{f^2}\begin{bmatrix}0&amp;-1&amp;0\1&amp;0&amp;0\0&amp;0&amp;0\end{bmatrix}]</p>
+<p>Multiplying F by scalar (t_z/f^2) scales both sides of (\mathbf{x}'^T F \mathbf{x} = 0) equally — zero is still zero. So the scalar is <strong>irrelevant</strong> and dropped. The magnitude and scale of translation do not affect <em>which</em> epipolar lines exist, only the <em>scale</em> of F — and scale is meaningless for F.</p>
+<hr />
+<h2 id="7-estimating-f-the-8-point-algorithm">7. Estimating F: The 8-Point Algorithm</h2>
+<h3 id="71-where-do-matched-points-come-from">7.1 Where Do Matched Points Come From?</h3>
+<p>Before estimating F, M matched pairs ({(\mathbf{x}_m, \mathbf{x}_m')}) are obtained through a <strong>feature matching pipeline</strong>: <a href="https://web.stanford.edu/class/cs231a/course_notes/03-epipolar-geometry.pdf">web.stanford</a></p>
+<p><strong>Stage 1 — Detect keypoints</strong> independently in both images. Keypoints are "interesting" pixels — corners, blobs — that are repeatable across viewpoints. Common detectors: Harris (eigenvalue-based corners), SIFT (scale-space extrema), ORB (FAST corners, very fast).</p>
+<p><strong>Stage 2 — Compute descriptors.</strong> For each keypoint, compute a compact vector encoding local appearance:</p>
+<table>
+<thead>
+<tr>
+<th>Descriptor</th>
+<th>Type</th>
+<th>Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIFT</td>
+<td>Gradient histogram</td>
+<td>128-D float</td>
+</tr>
+<tr>
+<td>ORB</td>
+<td>Binary pixel comparisons</td>
+<td>32-D binary</td>
+</tr>
+</tbody>
+</table>
+<p>Descriptors are invariant to rotation, scale, and lighting — so the same physical scene point produces nearly identical descriptors in both images.</p>
+<p><strong>Stage 3 — Match descriptors</strong> using nearest-neighbour search. Apply <strong>Lowe's ratio test</strong> to filter ambiguous matches:</p>
+<p>[\frac{d_{\text{nearest}}}{d_{\text{2nd nearest}}} &lt; 0.75]</p>
+<p>A match is accepted only if the nearest neighbour is clearly better than the second-nearest.</p>
+<p><strong>Stage 4 — RANSAC outlier rejection.</strong> Even after the ratio test, some matches are wrong (outliers). RANSAC:
+1. Randomly sample 8 matches → compute F
+2. Count matches satisfying (|\mathbf{x}'^T F \mathbf{x}| &lt; \varepsilon) — these are <strong>inliers</strong>
+3. Repeat many iterations → keep F with the most inliers</p>
+<p>The final M pairs are the <strong>clean RANSAC inliers</strong> passed to the 8-point algorithm.</p>
+<h3 id="72-setting-up-the-linear-system">7.2 Setting Up the Linear System</h3>
+<p>Flatten F row-by-row into a 9-vector (\mathbf{f} = (f_1, \ldots, f_9)^T). Each matched pair expands (\mathbf{x}_m'^T F \mathbf{x}_m = 0) into:</p>
+<p>[x_m x_m' f_1 + x_m y_m' f_2 + x_m f_3 + y_m x_m' f_4 + y_m y_m' f_5 + y_m f_6 + x_m' f_7 + y_m' f_8 + f_9 = 0]</p>
+<p>This is one linear equation in 9 unknowns — <strong>one row</strong> of a matrix system. Stack M pairs:</p>
+<p>[\underbrace{\begin{bmatrix} x_1x_1' &amp; x_1y_1' &amp; x_1 &amp; y_1x_1' &amp; y_1y_1' &amp; y_1 &amp; x_1' &amp; y_1' &amp; 1 \ \vdots &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; \vdots \ x_Mx_M' &amp; x_My_M' &amp; x_M &amp; y_Mx_M' &amp; y_My_M' &amp; y_M &amp; x_M' &amp; y_M' &amp; 1 \end{bmatrix}}_{A\;(M \times 9)} \begin{pmatrix}f_1\\vdots\f_9\end{pmatrix} = \mathbf{0}]</p>
+<p><strong>A is M×9 because:</strong> there are 9 unknowns (entries of F → 9 columns) and M point-pair equations (M rows), one per correspondence. <a href="https://lorenzopeppoloni.com/eightpoints/">lorenzopeppoloni</a></p>
+<h3 id="73-why-8-points-not-9">7.3 Why 8 Points, Not 9?</h3>
+<p>F has <strong>7 degrees of freedom</strong>, not 9. The two reductions are:</p>
+<ul>
+<li><strong>−1 for homogeneous scale:</strong> F is defined up to a non-zero scalar. The constraint (\mathbf{x}'^T F \mathbf{x} = 0) is unchanged if F → λF. So one DOF is always free — fixed by the unit-norm constraint (|\mathbf{f}| = 1), not by setting any individual entry to 1 (which would fail if that entry is near zero).</li>
+<li><strong>−1 for the rank-2 constraint:</strong> (\det F = 0) removes one more DOF. However, this is enforced <em>after</em> solving the linear system, not within it — so it does not contribute an equation here.</li>
+</ul>
+<p>Result: 9 − 1 (scale) = <strong>8 independent constraints needed → 8 point pairs</strong>.</p>
+<blockquote>
+<p><strong>Compare with Homography H:</strong> H has 8 DOF and each point pair gives <strong>2 scalar equations</strong> (because (\mathbf{x}' = H\mathbf{x}) is a 2D vector equation). So only 4 pairs are needed. For F, (\mathbf{x}'^T F \mathbf{x} = 0) is a <strong>scalar</strong> equation — only 1 per pair — hence 8 pairs. <a href="https://users.cecs.anu.edu.au/~hartley/Papers/fundamental/fundamental.pdf">users.cecs.anu.edu</a></p>
+</blockquote>
+<h3 id="74-solving-the-homogeneous-system-total-least-squares">7.4 Solving the Homogeneous System: Total Least Squares</h3>
+<p>The trivial solution (\mathbf{f} = \mathbf{0}) satisfies (A\mathbf{f} = \mathbf{0}) but is useless. Constrain the norm to exclude it:</p>
+<p>[\min_{\mathbf{f}} |A\mathbf{f}|^2 \quad \text{subject to} \quad |\mathbf{f}|^2 = 1]</p>
+<p><strong>Solution: SVD of A.</strong></p>
+<p>[A = U\Sigma V^T]</p>
+<p>The solution <strong>f</strong> is the <strong>last column of V</strong> — the right singular vector corresponding to the <strong>smallest singular value</strong> of A. This minimises (|A\mathbf{f}|^2) under the unit-norm constraint exactly. Reshape this 9-vector back into a 3×3 matrix to get the raw F.  <a href="https://users.cecs.anu.edu.au/~hartley/Papers/fundamental/electronic-submission/fundamental.pdf">users.cecs.anu.edu</a></p>
+<h3 id="75-the-complete-8-point-algorithm">7.5 The Complete 8-Point Algorithm</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Why It's Needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0. Normalize</strong></td>
+<td>Translate each image's points so centroid = origin; scale so avg distance from origin = √2</td>
+<td>Raw pixel coordinates (e.g. 343, 221) create huge numerical range in A — products like (x_mx_m') can be ~100,000 while the last entry is 1 — making A ill-conditioned and SVD unreliable</td>
+</tr>
+<tr>
+<td><strong>1. Build A</strong></td>
+<td>Construct M×9 matrix from normalized point pairs</td>
+<td>Encodes all epipolar constraints linearly</td>
+</tr>
+<tr>
+<td><strong>2. SVD of A</strong></td>
+<td>Compute (A = U\Sigma V^T)</td>
+<td>Solves the homogeneous least-squares system</td>
+</tr>
+<tr>
+<td><strong>3. Extract F</strong></td>
+<td>Reshape last column of V into 3×3 → F_raw</td>
+<td>Minimises residual (|A\mathbf{f}|^2)</td>
+</tr>
+<tr>
+<td><strong>4. Enforce rank 2</strong></td>
+<td>SVD of F_raw: zero out smallest singular value → (F = U\,\text{diag}(\sigma_1,\sigma_2,0)\,V^T)</td>
+<td>Raw F is generically rank 3 (noise fills the third singular value); true F must be rank 2</td>
+</tr>
+<tr>
+<td><strong>5. Un-normalize</strong></td>
+<td>(F_{\text{final}} = T'^T F_{\text{rank2}} T)</td>
+<td>Converts F back from normalised to original pixel coordinates</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why Step 4 gives the best rank-2 approximation:</strong> By the <strong>Eckart–Young theorem</strong>, the best rank-2 approximation to any matrix (in Frobenius norm) is obtained by zeroing the smallest singular value in its SVD. This is mathematically optimal.</p>
+<h3 id="76-finding-epipoles-from-f">7.6 Finding Epipoles from F</h3>
+<p>Once F is in hand, epipoles fall out of the SVD at no extra cost:</p>
+<p>[F = U\Sigma V^T]
+[\mathbf{e} = \text{last column of } V \quad (F\mathbf{e} = \mathbf{0} \;\text{— right null vector})]
+[\mathbf{e}' = \text{last column of } U \quad (F^T\mathbf{e}' = \mathbf{0} \;\text{— left null vector})]</p>
+<hr />
+<h2 id="8-full-pipeline">8. Full Pipeline</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two images</td>
+<td>Image 1 and image 2</td>
+</tr>
+<tr>
+<td>Feature matching pipeline</td>
+<td>Detect keypoints, compute descriptors, match with nearest neighbour plus Lowe's test, then apply RANSAC to obtain clean inlier pairs</td>
+</tr>
+<tr>
+<td>Matched pairs</td>
+<td>({(\mathbf{x}_m, \mathbf{x}_m')})</td>
+</tr>
+<tr>
+<td>8-point algorithm</td>
+<td>Normalize coordinates ((T, T')), build (M \times 9) matrix (A), compute SVD, extract (F_{\text{raw}}), enforce rank 2, then un-normalize</td>
+</tr>
+<tr>
+<td>Fundamental matrix</td>
+<td>(F \in \mathbb{R}^{3\times 3}), rank 2</td>
+</tr>
+<tr>
+<td>Epipolar lines</td>
+<td>(\mathbf{l}' = F\mathbf{x}) in image 2 and (\mathbf{l} = F^T\mathbf{x}') in image 1</td>
+</tr>
+<tr>
+<td>Epipoles</td>
+<td>(\mathbf{e}) is the right null vector of (F); (\mathbf{e}') is the left null vector of (F)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-quick-reference">9. Quick Reference</h2>
+<h3 id="key-equations">Key Equations</h3>
+<table>
+<thead>
+<tr>
+<th>Equation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(\mathbf{x}'^T F \mathbf{x} = 0)</td>
+<td>Fundamental epipolar constraint</td>
+</tr>
+<tr>
+<td>(\mathbf{l}' = F\mathbf{x})</td>
+<td>Epipolar line in image 2 for point <strong>x</strong> in image 1</td>
+</tr>
+<tr>
+<td>(\mathbf{l} = F^T\mathbf{x}')</td>
+<td>Epipolar line in image 1 for point <strong>x′</strong> in image 2</td>
+</tr>
+<tr>
+<td>(F = K'^{-T}[\mathbf{t}]_\times R K^{-1})</td>
+<td>F computed from known camera matrices</td>
+</tr>
+<tr>
+<td>(F\mathbf{e} = \mathbf{0})</td>
+<td><strong>e</strong> is the right null vector of F</td>
+</tr>
+<tr>
+<td>(F^T\mathbf{e}' = \mathbf{0})</td>
+<td><strong>e′</strong> is the left null vector of F</td>
+</tr>
+<tr>
+<td>### Properties of F</td>
+<td></td>
+</tr>
+<tr>
+<td>- 3×3 matrix, defined <strong>up to scale</strong> (homogeneous)</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Rank 2</strong>, determinant = 0</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>7 degrees of freedom</strong> (9 entries − 1 scale − 1 rank constraint)</td>
+<td></td>
+</tr>
+<tr>
+<td>- (F^T) is the fundamental matrix for the <strong>reversed</strong> camera pair</td>
+<td></td>
+</tr>
+<tr>
+<td>- Encodes the complete epipolar geometry between the two views</td>
+<td></td>
+</tr>
+<tr>
+<td>### Special Cases at a Glance</td>
+<td></td>
+</tr>
+<tr>
+<td>Camera Motion</td>
+<td>F (up to scale)</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td>Parallel (side-by-side)</td>
+<td>(\begin{bmatrix}0&amp;0&amp;0\0&amp;0&amp;-1\0&amp;1&amp;0\end{bmatrix})</td>
+</tr>
+<tr>
+<td>Forward translation</td>
+<td>(\begin{bmatrix}0&amp;-1&amp;0\1&amp;0&amp;0\0&amp;0&amp;0\end{bmatrix})</td>
+</tr>
+</tbody>
+</table>
+    </div>
+</body>
+</html>
