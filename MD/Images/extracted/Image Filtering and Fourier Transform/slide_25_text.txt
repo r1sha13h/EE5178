@@ -1,0 +1,4 @@
+Wrap-around (Ghosting)
+Because the DFT assumes the image is periodic, the Convolution Theorem performs Circular Convolution.
+If you apply a filter (like a blur) without enough space, pixels that "exit" the right side of the image frame will mathematically "wrap around" and bleed into the left side.
+To achieve Linear Convolution (standard filtering), we must pad the image with a border of zeros. This provides a "buffer zone" that prevents the filter from interacting with the periodic copies of the image.

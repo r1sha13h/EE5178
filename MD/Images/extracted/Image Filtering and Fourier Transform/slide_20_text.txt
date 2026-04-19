@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+Conjugate Symmetry
+For any real-valued image f(x, y) (which describes almost all standard digital images), the Fourier Transform is Hermitian symmetric.

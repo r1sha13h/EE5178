@@ -1,0 +1,4 @@
+Harris Detector: Rotation Invariance
+Rotation
+Ellipse rotates but its shape (i.e. eigenvalues)  remains the same
+Corner response R is invariant to image rotation

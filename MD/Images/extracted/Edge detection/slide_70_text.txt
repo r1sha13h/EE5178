@@ -1,0 +1,5 @@
+Canny Edge Detector: Double thresholding using Hysteresis thresholdingCourtesy : Bernd Girod;  Juan Carlos Niebles and Ranjay Krishna
+If the gradient M[x,y] at a pixel is
+above θHigh, declare it as an ‘strong edge pixel’
+below θLow, declare it as a “non-edge-pixel”
+between θLow and θHigh – Consider its neighbors iteratively then declare it an “edge pixel” if it is connected to an ‘strong edge pixel’ directly or via pixels between Low and High.

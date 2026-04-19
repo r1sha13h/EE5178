@@ -1,0 +1,3 @@
+Corner Points: Basic Idea
+We should easily recognize the point by looking  at intensity values within a small window
+Shifting the window in any direction should yield  a large change in appearance.

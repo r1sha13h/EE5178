@@ -1,0 +1,3 @@
+Harris Corner Derivation
+First order approx
+Rewrite as matrix equation

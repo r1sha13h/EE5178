@@ -1,0 +1,1 @@
+Zero crossings of LoG - gradient based thresholding

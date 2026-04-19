@@ -1,0 +1,3 @@
+Fast Fourier Transform (FFT)
+The 2D Fast Fourier Transform (FFT) is an optimized algorithm for computing the Discrete Fourier Transform (DFT).
+It treats a 2D grid as a series of separable 1D transforms, exploiting the symmetry and periodicity of complex exponentials to eliminate redundant calculations.

@@ -1,0 +1,3 @@
+Edge Detection using 1st Derivative ( Gradients )Courtesy Juan Carlos Niebles and Ranjay Krishna
+Derivative in x-direction
+Derivative in y-direction

@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+Translation (Spatial Shift):
+Shifting an image in the spatial domain only changes the phase in the frequency domain; the magnitude remains identical.

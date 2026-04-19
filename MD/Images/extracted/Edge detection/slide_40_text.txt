@@ -1,0 +1,2 @@
+Tradeoff between smoothing at different scalesCourtesy Juan Carlos Niebles and Ranjay Krishna
+Smoothed derivative removes noise, but blurs edge.

@@ -1,0 +1,7 @@
+Activation functions for hidden layers
+h = g(Wx+b);
+Affine transformation followed by activation function, g
+g(z)  = max{0,z}, ReLU
+g(z)  = σ(z), sigmoid
+tanh(z)  = 2σ(2z) - 1
+Very important factor in learning features

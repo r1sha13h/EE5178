@@ -1,0 +1,2 @@
+McCulloch - Pits model
+NOR gate

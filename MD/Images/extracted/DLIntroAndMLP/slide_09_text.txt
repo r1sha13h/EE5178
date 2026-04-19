@@ -1,0 +1,2 @@
+Artistic applications
+Image-to-Image Translation with Conditional Adversarial Nets by Isola et al., CVPR’ 17

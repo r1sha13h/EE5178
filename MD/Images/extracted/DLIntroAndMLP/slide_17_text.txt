@@ -1,0 +1,4 @@
+Perceptron - Limitations
+Goal: learn the XoR function (f*)
+The data is not linearly separable
+*Slide courtesy, Ian Goodfellow et al., deep learning book

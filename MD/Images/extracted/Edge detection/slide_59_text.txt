@@ -1,0 +1,1 @@
+Derivative of Gaussian filterCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna

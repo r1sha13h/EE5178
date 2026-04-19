@@ -1,0 +1,5 @@
+Motivation: Patch Matching
+Task: find the best (most similar) patch in a second image
+?
+=
+Elements to be matched are image patches of fixed size

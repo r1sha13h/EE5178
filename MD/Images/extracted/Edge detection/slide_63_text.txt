@@ -1,0 +1,1 @@
+Compute gradients (DoG)Courtesy Courtesy Juan Carlos Niebles and Ranjay Krishna

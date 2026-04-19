@@ -1,0 +1,2 @@
+Scale-invariant features: BlobsCourtesy: Forsyth and Ponce
+To detect blobs, convolve the image with a “blob filter” at multiple scales and look for extrema of filter response in the resulting scale space

@@ -1,0 +1,777 @@
+[
+  {
+    "slide": 1,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Corner Detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 2,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Motivation: Matching Problem"
+      },
+      {
+        "level": 0,
+        "text": "Vision tasks such as stereo and motion estimation require  finding corresponding features across two or more views."
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 3,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Motivation: Patch Matching"
+      },
+      {
+        "level": 0,
+        "text": "Task: find the best (most similar) patch in a second image"
+      },
+      {
+        "level": 0,
+        "text": "?"
+      },
+      {
+        "level": 0,
+        "text": "="
+      },
+      {
+        "level": 0,
+        "text": "Elements to be matched are image patches of fixed size"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 4,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Not all Patches are Created Equal!"
+      },
+      {
+        "level": 0,
+        "text": "Intuition: this would be a good patch for matching, since  it is very distinctive (there is only one patch in the second  frame that looks similar)."
+      },
+      {
+        "level": 0,
+        "text": "?"
+      },
+      {
+        "level": 0,
+        "text": "="
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 5,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Not all Patches are Created Equal!"
+      },
+      {
+        "level": 0,
+        "text": "Intuition: this would be a BAD patch for matching, since  it is not very distinctive (there are many similar patches  in the second frame)"
+      },
+      {
+        "level": 0,
+        "text": "?"
+      },
+      {
+        "level": 0,
+        "text": "="
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 6,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What are Corners?"
+      },
+      {
+        "level": 0,
+        "text": "They are good features to match!"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_06_img_1.jpg"
+    ]
+  },
+  {
+    "slide": 7,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Points: Basic Idea"
+      },
+      {
+        "level": 0,
+        "text": "We should easily recognize the point by looking  at intensity values within a small window"
+      },
+      {
+        "level": 0,
+        "text": "Shifting the window in any direction should yield  a large change in appearance."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_07_img_1.png"
+    ]
+  },
+  {
+    "slide": 8,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Corner Detector: Basic Idea"
+      },
+      {
+        "level": 0,
+        "text": "Harris corner detector gives a mathematical  approach for determining which case holds."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_08_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_08_img_2.jpg"
+    ]
+  },
+  {
+    "slide": 9,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector: Mathematics"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 10,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector: Intuition"
+      },
+      {
+        "level": 0,
+        "text": "For nearly constant patches, this will be near 0.  For very distinctive patches, this will be larger.  Hence... we want patches where E(u,v) is LARGE."
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 11,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Taylor Series for 2D Functions"
+      },
+      {
+        "level": 0,
+        "text": "First partial derivatives"
+      },
+      {
+        "level": 0,
+        "text": "Second partial derivatives"
+      },
+      {
+        "level": 0,
+        "text": "Third partial derivatives"
+      },
+      {
+        "level": 0,
+        "text": "(Higher order terms)"
+      },
+      {
+        "level": 0,
+        "text": "First order approx"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_11_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_11_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_11_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_11_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_11_img_8.png"
+    ]
+  },
+  {
+    "slide": 12,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Corner Derivation"
+      },
+      {
+        "level": 0,
+        "text": "First order approx"
+      },
+      {
+        "level": 0,
+        "text": "Rewrite as matrix equation"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_12_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_12_img_2.jpg",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_12_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_12_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_12_img_6.png"
+    ]
+  },
+  {
+    "slide": 13,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector: Mathematics"
+      },
+      {
+        "level": 0,
+        "text": "Note: these are just products of  components of the gradient, Ix, Iy"
+      },
+      {
+        "level": 0,
+        "text": "Windowing function - computing a  weighted sum (simplest case, w=1)"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_13_img_1.png"
+    ]
+  },
+  {
+    "slide": 14,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Example: Cases and 2D Derivatives"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_14_img_1.jpg"
+    ]
+  },
+  {
+    "slide": 15,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Plotting Derivatives as 2D Points"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_15_img_1.jpg"
+    ]
+  },
+  {
+    "slide": 16,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fitting Ellipse to each Set of Points"
+      },
+      {
+        "level": 0,
+        "text": "\u03bb1~\u03bb2 = small"
+      },
+      {
+        "level": 0,
+        "text": "\u03bb1 large; \u03bb2 = small"
+      },
+      {
+        "level": 0,
+        "text": "\u03bb1~\u03bb2 = large"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_16_img_1.jpg"
+    ]
+  },
+  {
+    "slide": 17,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Classification via Eigenvalues"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 18,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Measure"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_18_img_1.jpg"
+    ]
+  },
+  {
+    "slide": 19,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Map\u000blambda1"
+      },
+      {
+        "level": 0,
+        "text": "R=0"
+      },
+      {
+        "level": 0,
+        "text": "R=28"
+      },
+      {
+        "level": 0,
+        "text": "R=65"
+      },
+      {
+        "level": 0,
+        "text": "R=104"
+      },
+      {
+        "level": 0,
+        "text": "R=142"
+      },
+      {
+        "level": 0,
+        "text": "lambda2"
+      },
+      {
+        "level": 0,
+        "text": "(0,0)"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 20,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Map"
+      },
+      {
+        "level": 0,
+        "text": "R=28"
+      },
+      {
+        "level": 0,
+        "text": "R=65"
+      },
+      {
+        "level": 0,
+        "text": "R=104"
+      },
+      {
+        "level": 0,
+        "text": "R=142"
+      },
+      {
+        "level": 0,
+        "text": "lambda2"
+      },
+      {
+        "level": 0,
+        "text": "|R| small  \u201cFlat\u201d"
+      },
+      {
+        "level": 0,
+        "text": "R < 0 \u201cEdge\u201d"
+      },
+      {
+        "level": 0,
+        "text": "lambda1"
+      },
+      {
+        "level": 0,
+        "text": "R=0"
+      },
+      {
+        "level": 0,
+        "text": "R < 0 \u201cEdge\u201d"
+      },
+      {
+        "level": 0,
+        "text": "R large  \u201cCorner\u201d"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_20_img_7.png"
+    ]
+  },
+  {
+    "slide": 21,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Example"
+      },
+      {
+        "level": 0,
+        "text": "Harris R score."
+      },
+      {
+        "level": 0,
+        "text": "Ix, Iy computed using Sobel operator  Windowing function w = Gaussian, sigma=1"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_21_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_21_img_3.png"
+    ]
+  },
+  {
+    "slide": 22,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Example"
+      },
+      {
+        "level": 0,
+        "text": "Threshold:\tR < -10000  (edges)"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_22_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_22_img_1.png"
+    ]
+  },
+  {
+    "slide": 23,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Example"
+      },
+      {
+        "level": 0,
+        "text": "Threshold:\t> 10000"
+      },
+      {
+        "level": 0,
+        "text": "(corners)"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_23_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_23_img_1.png"
+    ]
+  },
+  {
+    "slide": 24,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Corner Response Example"
+      },
+      {
+        "level": 0,
+        "text": "Threshold:\t-10000 < R < 10000  (neither edges nor corners)"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_24_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_24_img_1.png"
+    ]
+  },
+  {
+    "slide": 25,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Corner Detection Algorithm"
+      },
+      {
+        "level": 0,
+        "text": "6. Threshold on value of R. Compute nonmax suppression."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_25_img_1.jpg",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_25_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Harris Corner Detector/slide_25_img_4.jpg"
+    ]
+  },
+  {
+    "slide": 26,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector - Example"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 27,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector - Example"
+      },
+      {
+        "level": 0,
+        "text": "Compute corner response R"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 28,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector - Example"
+      },
+      {
+        "level": 0,
+        "text": "Find points with large corner response: R>threshold"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 29,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector - Example"
+      },
+      {
+        "level": 0,
+        "text": "Take only the points of local maxima of R"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 30,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector - Example"
+      },
+      {
+        "level": 0,
+        "text": "Map corners on the original image"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 31,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector \u2013 Scale Parameters"
+      },
+      {
+        "level": 0,
+        "text": "The Harris detector requires two scale  parameters:"
+      },
+      {
+        "level": 1,
+        "text": "a differentiation scale \u03c3D for smoothing prior to the  computation of image derivatives,"
+      },
+      {
+        "level": 0,
+        "text": "&"
+      },
+      {
+        "level": 1,
+        "text": "an integration scale \u03c3I for defining the size of the  Gaussian window (i.e., integrating derivative"
+      },
+      {
+        "level": 0,
+        "text": "responses)."
+      },
+      {
+        "level": 0,
+        "text": "Typically, \u03c3I=\u03b3\u03c3D"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 32,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Invariance to Geometric/Photometric Changes"
+      },
+      {
+        "level": 0,
+        "text": "Is the Harris detector invariant to geometric and  photometric changes?"
+      },
+      {
+        "level": 0,
+        "text": "Geometric"
+      },
+      {
+        "level": 1,
+        "text": "Rotation"
+      },
+      {
+        "level": 1,
+        "text": "Scale"
+      },
+      {
+        "level": 1,
+        "text": "Affine"
+      },
+      {
+        "level": 0,
+        "text": "Photometric"
+      },
+      {
+        "level": 1,
+        "text": "Affine intensity change: I(x,y) \uf0ae a I(x,y) + b"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 33,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector: Rotation Invariance"
+      },
+      {
+        "level": 0,
+        "text": "Rotation"
+      },
+      {
+        "level": 0,
+        "text": "Ellipse rotates but its shape (i.e. eigenvalues)  remains the same"
+      },
+      {
+        "level": 0,
+        "text": "Corner response R is invariant to image rotation"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 34,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector: Rotation Invariance (cont\u2019d)"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 35,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Harris Detector: Scale Invariance"
+      },
+      {
+        "level": 0,
+        "text": "All points will  be classified  as edges"
+      },
+      {
+        "level": 0,
+        "text": "Scaling"
+      },
+      {
+        "level": 0,
+        "text": "Corner"
+      },
+      {
+        "level": 0,
+        "text": "Not invariant to scaling (and affine transforms)"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  }
+]

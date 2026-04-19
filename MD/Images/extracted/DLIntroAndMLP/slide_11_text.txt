@@ -1,0 +1,7 @@
+Basic Neural Networks
+Multi-layer perceptrons (MLP) is a feed forward neural network with hidden layers
+Hidden layers increase abstraction
+*pic courtesy, Sancho course
+Universal Approximation Theorem:
+simple neural networks can represent a wide variety of interesting functions when given appropriate parameters
+hence, better to have more hidden layers than a single layer with large number of neurons

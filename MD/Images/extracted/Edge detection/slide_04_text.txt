@@ -1,0 +1,3 @@
+Definition of edgesCourtesy Trucco, Ch. 4 AND Jain et al., Ch. 5
+- Edges are significant local changes of intensity in an image.
+- Edges typically occur on the boundary between two different regions in an image.

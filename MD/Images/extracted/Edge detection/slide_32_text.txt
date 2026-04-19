@@ -1,0 +1,2 @@
+Effect of NOISE: What is to be done?Courtesy Juan Carlos Niebles and Ranjay Krishna
+Smoothing the image should help, by forcing pixels different to their neighbors (=noise pixels?) to look more like neighbors.

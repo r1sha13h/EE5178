@@ -1,0 +1,2 @@
+Introduction to Neural Networks
+Perceptron, XOR Problem, Multi-layer Perceptron (MLP), Cost Functions, Activation functions and Output units

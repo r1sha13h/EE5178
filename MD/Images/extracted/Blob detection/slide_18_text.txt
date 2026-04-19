@@ -1,0 +1,3 @@
+Scale selectionCourtesy: Forsyth and Ponce
+We want to find the characteristic scale of the blob by convolving it with Laplacians at several scales and looking for the maximum response
+However, Laplacian response decays as scale increases:

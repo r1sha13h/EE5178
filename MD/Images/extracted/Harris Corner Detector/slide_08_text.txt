@@ -1,0 +1,2 @@
+Harris Corner Detector: Basic Idea
+Harris corner detector gives a mathematical  approach for determining which case holds.

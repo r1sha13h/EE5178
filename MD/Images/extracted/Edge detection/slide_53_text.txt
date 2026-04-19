@@ -1,0 +1,4 @@
+Designing an edge detectorCourtesy Juan Carlos Niebles and Ranjay Krishna
+Good detection: the optimal detector must minimize the probability of false positives (detecting spurious edges caused by noise), as well as that of false negatives (missing real edges).
+Good localization: the edges detected must be as close as possible to the true edges.
+Single response: the detector must return one point only for each true edge point; that is, minimize the number of local maxima around the true edge.

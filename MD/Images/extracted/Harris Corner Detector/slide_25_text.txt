@@ -1,0 +1,2 @@
+Harris Corner Detection Algorithm
+6. Threshold on value of R. Compute nonmax suppression.

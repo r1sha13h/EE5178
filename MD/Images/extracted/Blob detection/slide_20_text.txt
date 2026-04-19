@@ -1,0 +1,4 @@
+Scale normalizationCourtesy: Forsyth and Ponce
+The response of a derivative of Gaussian filter to a perfect step edge decreases as σ increases
+To keep response the same (scale-invariant), must multiply Gaussian derivative by σ
+Laplacian is the second Gaussian derivative, so it must be multiplied by σ^2

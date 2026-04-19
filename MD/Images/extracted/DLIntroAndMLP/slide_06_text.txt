@@ -1,0 +1,11 @@
+Object Detection
+pic courtesy: http://mrulafi.blogspot.in/2016_05_01_archive.html
+OverFeat by  Sermanet et al., ICLR’ 14 (NYU)
+R-CNN by Girshick et al., CVPR’ 14 (UCB)
+SPP by He et al., ECCV’ 14 (MSR)
+Fast R-CNN by Girshick et al., arxiv (MSR)
+Faster R-CNN by Ren et al., NIPS’ 15 (MSR)
+YOLO by Redmon et al., arxiv 2015
+YOLO 9000 by Redmon et al., CVPR’ 17
+Faster RCNN detections
+YOLO 9000 detections

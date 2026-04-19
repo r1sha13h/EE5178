@@ -1,0 +1,2 @@
+Sobel operator example (cont.)Courtesy Digital Image Processing: Bernd Girod
+Courtesy Digital Image Processing: Bernd Girod

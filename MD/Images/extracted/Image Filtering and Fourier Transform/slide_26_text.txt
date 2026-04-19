@@ -1,0 +1,2 @@
+The Inverse 2D DFT (IFT)
+To reconstruct the spatial image f(x, y) from its frequency coefficients F(u,v), we sum the weighted basis functions:

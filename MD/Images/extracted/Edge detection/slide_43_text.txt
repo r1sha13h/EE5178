@@ -1,0 +1,5 @@
+A basic edge detector
+Filter image with x and y derivative of Gaussian
+That is, I_x= I*dG/dx an and
+Find magnitude of gradient:
+Threshold to keep strong edges: if              , then strong edge.

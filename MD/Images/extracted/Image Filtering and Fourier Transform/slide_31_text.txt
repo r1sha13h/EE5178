@@ -1,0 +1,5 @@
+1D FFT
+The 1D FFT is a "Divide and Conquer" algorithm that reduces complexity from O(N^2) to O(N log N).
+It splits the data into Even and Odd samples, solves them as smaller sub-problems, and then recombines them.
+This efficiency relies on the Symmetry and Periodicity of the "Twiddle Factor," which allows the algorithm to reuse previous calculations instead of repeating.
+1D FFT Equation

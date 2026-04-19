@@ -1,0 +1,13 @@
+Activation functions for Output units
+Linear units for real valued outputs
+Activation function is left to be linear
+Given features h,
+Most commonly used with regression tasks
+y’ = Wh+b
+Say you want to do binary classification
+What kind of distribution describes output? Bernouli
+How to constrain the output - valid probability?
+Can you use linear activation?
+What is the problem?
+Not amenable for gradient based learning
+Instead, use sigmoid unit - output ∊ [0,1]

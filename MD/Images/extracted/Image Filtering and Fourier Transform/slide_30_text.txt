@@ -1,0 +1,2 @@
+2D FFT to 1D FFT
+Row-Column Decomposition using the  Separability Equation

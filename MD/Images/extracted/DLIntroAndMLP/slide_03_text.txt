@@ -1,0 +1,4 @@
+Traditional approaches
+Manual feature extraction (SIFT/HOG)
+Classifier is learned independent of feature extraction
+*slide courtesy, Yoshua Bengio and Yahn Lecun

@@ -1,0 +1,12 @@
+Basic Neural Networks
+What we will learn in the course about Neural Networks?
+McCulloch and Pits model
+Rosenblatt’s perceptron
+Introduction
+Perceptrons
+Geometry and linear separability
+XoR problem
+Multi-layer perceptron (MLP)
+Training MLPs
+Error back propagation
+Loss functions

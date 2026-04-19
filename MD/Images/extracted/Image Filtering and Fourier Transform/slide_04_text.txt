@@ -1,0 +1,3 @@
+Types of Noises in Images: Gaussian Noise
+Most common type of noise
+Caused by lighting effects, sensor limitations and electronic interference

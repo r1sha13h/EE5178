@@ -1,0 +1,2 @@
+Solution: smooth first Courtesy Juan Carlos Niebles and Ranjay Krishna
+Image -> Smoothen the image -> Take the derivative to detect Edges

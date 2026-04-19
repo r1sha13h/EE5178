@@ -1,0 +1,5 @@
+Apply Non-Maximum SuppressionCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna
+Edge occurs where gradient reaches a maxima
+Suppress non-maxima gradient even if it passes threshold
+Only eight angle directions possible
+– Suppress all pixels in each direction which are not maxima – Do this in each marked pixel neighborhood

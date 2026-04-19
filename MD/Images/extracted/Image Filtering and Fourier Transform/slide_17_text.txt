@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+Separability:
+The 2D transform can be computed by performing 1D transforms along the rows, followed by 1D transforms along the columns.

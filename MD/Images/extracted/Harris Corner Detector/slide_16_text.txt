@@ -1,0 +1,4 @@
+Fitting Ellipse to each Set of Points
+λ1~λ2 = small
+λ1 large; λ2 = small
+λ1~λ2 = large

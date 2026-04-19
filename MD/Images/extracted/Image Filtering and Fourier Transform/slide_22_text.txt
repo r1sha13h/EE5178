@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+The Discrete Fourier Transform (DFT) and its inverse are infinitely periodic in both the u and v directions.
+This means the transform repeats itself every M units horizontally and N units vertically.

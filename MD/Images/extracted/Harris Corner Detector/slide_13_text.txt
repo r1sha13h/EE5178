@@ -1,0 +1,3 @@
+Harris Detector: Mathematics
+Note: these are just products of  components of the gradient, Ix, Iy
+Windowing function - computing a  weighted sum (simplest case, w=1)

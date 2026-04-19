@@ -1,0 +1,8 @@
+Perceptron - geometrical interpretation
+, What does this inequality imply in 2D case?
+Half plane
+Any function that is linearly separable can be
+computed by a perceptron
+x1 + x2 > 1.5
+w1 = 1, w2 = 1 and μ = 1.5
+Solve for W, μ:

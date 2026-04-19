@@ -1,0 +1,1 @@
+Recap: Blob as keypoint followed by SIFT descriptor for matching

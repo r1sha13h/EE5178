@@ -1,0 +1,8 @@
+Image, Video and Audio Generation
+PixelRNN/CNN by Gregor et al.,
+ICML’ 16 Best paper (Samples from ImageNet)
+DCGAN Chintala et al. ICLR’ 16
+Sample bedroom images
+WaveNet for audio synthesis by Oord et al. 2016, Deepmind
+Check out wavenet’s generated music
+piano clips

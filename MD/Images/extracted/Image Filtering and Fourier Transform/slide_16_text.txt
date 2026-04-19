@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+Linearity:
+The transform of a weighted sum of images is the weighted sum of their individual transforms.

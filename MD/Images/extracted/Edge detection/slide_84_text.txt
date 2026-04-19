@@ -1,0 +1,1 @@
+Laplacian Edge DetectorCourtesy Saad J Bedros

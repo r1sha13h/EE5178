@@ -1,0 +1,3 @@
+Derivative theorem of convolution - This saves us one operation Courtesy Juan Carlos Niebles and Ranjay Krishna
+Image -> Smoothen the image -> Take the derivative to detect Edges
+These two steps can be combined.

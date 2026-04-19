@@ -1,0 +1,9 @@
+Types of Noises in Images
+Sources of Noise
+Capture Noise: Noise in the environment of the scene captured
+Lighting (high lit and low lit)
+Sensor (temperature fluctuations, electrical interference)
+Lens (dust, fog etc.)
+Sampling Noise: Continuous Real World Scene to Discrete Pixels. Can cause aliasing effects
+Processing Noise: Noise introduced when processing images due to mathematical approximations
+Image Compression Noise: JPEG Lossy Compression removes finer details

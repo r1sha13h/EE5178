@@ -1,0 +1,635 @@
+[
+  {
+    "slide": 1,
+    "title": "Keypoint detection:\nBlob detection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Keypoint detection:"
+      },
+      {
+        "level": 0,
+        "text": "Blob detection"
+      },
+      {
+        "level": 0,
+        "text": "EE5178: Modern Computer Vision"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 2,
+    "title": "Feature extraction: Corner / Blob detection\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Feature extraction: Corner / Blob detection\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "Corner detection"
+      },
+      {
+        "level": 0,
+        "text": "Blob detection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_02_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_02_img_2.png"
+    ]
+  },
+  {
+    "slide": 3,
+    "title": "Why extract Keypoints?",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Why extract Keypoints?"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_03_img_2.png"
+    ]
+  },
+  {
+    "slide": 4,
+    "title": "Why extract Keypoints?",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Why extract Keypoints?"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_04_img_2.png"
+    ]
+  },
+  {
+    "slide": 5,
+    "title": "Why extract Keypoints?",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Why extract Keypoints?"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_05_img_2.png"
+    ]
+  },
+  {
+    "slide": 6,
+    "title": "Other applications of Keypoints",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Other applications of Keypoints"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_06_img_2.png"
+    ]
+  },
+  {
+    "slide": 7,
+    "title": "Characteristics of good features\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Characteristics of good features\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "Repeatability"
+      },
+      {
+        "level": 1,
+        "text": "The same feature can be found in several images despite geometric and photometric transformations"
+      },
+      {
+        "level": 0,
+        "text": "Saliency"
+      },
+      {
+        "level": 1,
+        "text": "Each feature has a distinctive description"
+      },
+      {
+        "level": 0,
+        "text": "Compactness and efficiency"
+      },
+      {
+        "level": 1,
+        "text": "Many fewer features than image pixels"
+      },
+      {
+        "level": 0,
+        "text": "Locality"
+      },
+      {
+        "level": 1,
+        "text": "A feature occupies a relatively small area of the image; robust to clutter and occlusion"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_07_img_1.png"
+    ]
+  },
+  {
+    "slide": 8,
+    "title": "Keypoints as image features",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Keypoints as image features"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_08_img_2.png"
+    ]
+  },
+  {
+    "slide": 9,
+    "title": "Finding Corners\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Finding Corners\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "Key property: in the region around a corner, image gradient has two or more dominant directions"
+      },
+      {
+        "level": 0,
+        "text": "This topic will be covered later. Example of this is Harris corners."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_09_img_3.png"
+    ]
+  },
+  {
+    "slide": 10,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_10_img_2.png"
+    ]
+  },
+  {
+    "slide": 11,
+    "title": "Feature detection with scale selection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Feature detection with scale selection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_11_img_2.png"
+    ]
+  },
+  {
+    "slide": 12,
+    "title": "Blob detection: Basic idea",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Blob detection: Basic idea"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_12_img_2.png"
+    ]
+  },
+  {
+    "slide": 13,
+    "title": "Blob detection: Basic idea",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Blob detection: Basic idea"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_13_img_2.png"
+    ]
+  },
+  {
+    "slide": 14,
+    "title": "Blob filter",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Blob filter"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_14_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_14_img_3.png"
+    ]
+  },
+  {
+    "slide": 15,
+    "title": "Scale-invariant features: Blobs\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-invariant features: Blobs\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "To detect blobs, convolve the image with a \u201cblob filter\u201d at multiple scales and look for extrema of filter response in the resulting scale space"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_15_img_1.png"
+    ]
+  },
+  {
+    "slide": 16,
+    "title": "Recall: Edge detection\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Recall: Edge detection\u000bCourtesy: Forsyth and Ponce"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_16_img_1.png"
+    ]
+  },
+  {
+    "slide": 17,
+    "title": "From edges to blobs\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "From edges to blobs\u000bCourtesy: Forsyth and Ponce"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_17_img_1.png"
+    ]
+  },
+  {
+    "slide": 18,
+    "title": "Scale selection\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale selection\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "We want to find the characteristic scale of the blob by convolving it with Laplacians at several scales and looking for the maximum response"
+      },
+      {
+        "level": 0,
+        "text": "However, Laplacian response decays as scale increases:"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_18_img_3.png"
+    ]
+  },
+  {
+    "slide": 19,
+    "title": "Scale normalization\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale normalization\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "The response of a derivative of Gaussian filter to a perfect step edge decreases as \u03c3 increases"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_19_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_19_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_19_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_19_img_5.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_19_img_6.png"
+    ]
+  },
+  {
+    "slide": 20,
+    "title": "Scale normalization\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale normalization\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "The response of a derivative of Gaussian filter to a perfect step edge decreases as \u03c3 increases"
+      },
+      {
+        "level": 0,
+        "text": "To keep response the same (scale-invariant), must multiply Gaussian derivative by \u03c3"
+      },
+      {
+        "level": 0,
+        "text": "Laplacian is the second Gaussian derivative, so it must be multiplied by \u03c3^2"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 21,
+    "title": "Scale-invariant features: Blobs\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-invariant features: Blobs\u000bCourtesy: Forsyth and Ponce"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_21_img_1.png"
+    ]
+  },
+  {
+    "slide": 22,
+    "title": "Blobs Detection in 2D\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Blobs Detection in 2D\u000bCourtesy: Forsyth and Ponce"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_22_img_1.png"
+    ]
+  },
+  {
+    "slide": 23,
+    "title": "Scale selection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale selection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_23_img_2.png"
+    ]
+  },
+  {
+    "slide": 24,
+    "title": "Scale selection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale selection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_24_img_2.png"
+    ]
+  },
+  {
+    "slide": 25,
+    "title": "Scale-space blob detection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-space blob detection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_25_img_2.png"
+    ]
+  },
+  {
+    "slide": 26,
+    "title": "Scale-space blob detection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-space blob detection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_26_img_2.png"
+    ]
+  },
+  {
+    "slide": 27,
+    "title": "Scale-space blob detection",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-space blob detection"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_27_img_2.png"
+    ]
+  },
+  {
+    "slide": 28,
+    "title": "Scale-space blob detector\u000bCourtesy: S. Lazebnik",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-space blob detector\u000bCourtesy: S. Lazebnik"
+      },
+      {
+        "level": 0,
+        "text": "Convolve image with scale-normalized Laplacian at several scales"
+      },
+      {
+        "level": 0,
+        "text": "Find maxima of squared Laplacian response in scale-space"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_28_img_2.png"
+    ]
+  },
+  {
+    "slide": 29,
+    "title": "Scale-space blob detection: Example",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Scale-space blob detection: Example"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_29_img_2.png"
+    ]
+  },
+  {
+    "slide": 30,
+    "title": "Efficient implementation\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Efficient implementation\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "Approximating the Laplacian with a difference of Gaussians:"
+      },
+      {
+        "level": 0,
+        "text": "Derivation based on heat diffusion equation. For more details see Sec 3, pgs 5-6 of David Lowe, IJCV 2004 paper: https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_30_img_2.png"
+    ]
+  },
+  {
+    "slide": 31,
+    "title": "Efficient implementation\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Efficient implementation\u000bCourtesy: Forsyth and Ponce"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_31_img_1.png"
+    ]
+  },
+  {
+    "slide": 32,
+    "title": "Keypoint Descriptor, SIFT: Will be covered later\u000bCourtesy: S. Lazebnik",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Keypoint Descriptor, SIFT: Will be covered later\u000bCourtesy: S. Lazebnik"
+      },
+      {
+        "level": 0,
+        "text": "Divide 16\u00d716 window into 4\u00d74 grid of cells"
+      },
+      {
+        "level": 0,
+        "text": "Compute an orientation histogram for each cell"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 16 cells * 8 orientations = 128-dimensional descriptor"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_32_img_2.png"
+    ]
+  },
+  {
+    "slide": 33,
+    "title": "Recap: Blob as keypoint followed by SIFT descriptor for matching",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Recap: Blob as keypoint followed by SIFT descriptor for matching"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_33_img_2.png"
+    ]
+  },
+  {
+    "slide": 34,
+    "title": "Recap: Blob as keypoint followed by SIFT descriptor for matching",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Recap: Blob as keypoint followed by SIFT descriptor for matching"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_34_img_1.png"
+    ]
+  },
+  {
+    "slide": 35,
+    "title": "What we covered today:\nScale-invariant features: Blobs\u000bCourtesy: Forsyth and Ponce",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we covered today:"
+      },
+      {
+        "level": 0,
+        "text": "Scale-invariant features: Blobs\u000bCourtesy: Forsyth and Ponce"
+      },
+      {
+        "level": 0,
+        "text": "To detect blobs, convolve the image with a \u201cblob filter\u201d at multiple scales and look for extrema of filter response in the resulting scale space"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_35_img_1.png"
+    ]
+  },
+  {
+    "slide": 36,
+    "title": "What we covered today:\nScale-space blob detector\u000bCourtesy: S. Lazebnik",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we covered today:"
+      },
+      {
+        "level": 0,
+        "text": "Scale-space blob detector\u000bCourtesy: S. Lazebnik"
+      },
+      {
+        "level": 0,
+        "text": "Convolve image with scale-normalized Laplacian at several scales"
+      },
+      {
+        "level": 0,
+        "text": "Find maxima of squared Laplacian response in scale-space"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Blob detection/slide_36_img_2.png"
+    ]
+  }
+]

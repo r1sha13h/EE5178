@@ -1,0 +1,2 @@
+Edge detection
+EE5178: Modern Computer Vision

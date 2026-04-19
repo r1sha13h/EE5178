@@ -1,0 +1,6 @@
+Why Frequency domain in 2D?
+This forms a core pillar of classical computer vision
+Anti-Aliasing: Prevents artifacts (Moiré patterns) by removing high frequencies before downsampling.
+Compression: Enables JPEG by discarding high-frequency "noise" the human eye can't perceive.
+Efficiency: The Convolution Theorem turns expensive spatial filtering into fast, pointwise multiplication.
+Denoising: Allows for precise removal of periodic patterns or "grid noise" from sensors.

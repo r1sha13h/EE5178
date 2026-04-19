@@ -1,0 +1,8 @@
+Image Classification
+Surpassed Human Performance
+LeNet by Lecun et al. 1998 (MNIST)
+AlexNet by Krish et al. NIPS’ 12
+VGGNet by Simonyan et al. ICLR’ 15
+GoogLeNet by Szegedy et al. CVPR’ 15
+ResNet by He et al., CVPR’ 17 best paper
+*pic courtesy: Kaiming He

@@ -1,0 +1,4 @@
+The Differentiation Property
+Differentiating in the spatial domain corresponds to multiplying by the frequency variable in the frequency domain.
+Spatial Derivative: Finding the rate of change of pixel intensities.
+Frequency Equivalent: Multiplying by a ramp function.

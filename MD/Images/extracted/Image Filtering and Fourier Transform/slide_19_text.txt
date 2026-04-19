@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+Scaling:
+Stretching an image in the spatial domain leads to a reciprocal "shrinking" in the frequency domain.

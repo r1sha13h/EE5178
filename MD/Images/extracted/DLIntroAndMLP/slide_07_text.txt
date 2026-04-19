@@ -1,0 +1,5 @@
+Image Segmentation
+*Pic courtesy: Kundu et al. CVPR 2016 on City scapes dataset
+FCN by Long et al. CVPR’ 15
+DeepLab by Chen et al. arxiv 2015
+CRFS as RNNs by Zheng et al. ICCV’ 15

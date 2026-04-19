@@ -1,0 +1,4 @@
+Some practical issues: Effect of NOISECourtesy Juan Carlos Niebles and Ranjay Krishna
+Consider a single row or column of the image
+– Plotting intensity as a function of position gives a signal
+– Where is the edge?

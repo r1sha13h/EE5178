@@ -1,0 +1,4 @@
+Some practical issues: Effect of NOISECourtesy Juan Carlos Niebles and Ranjay Krishna
+Finite difference filters respond strongly to
+noise
+– Generally, the larger the noise the stronger the response

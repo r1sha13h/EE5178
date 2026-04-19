@@ -1,0 +1,2 @@
+Derivative theorem of convolution - This saves us one operation Courtesy Juan Carlos Niebles and Ranjay Krishna
+Image -> CONVOLVE with APPROPRIATE KERNEL

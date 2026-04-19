@@ -1,0 +1,4 @@
+Discrete Fourier Transform
+In the physical world, light is continuous. In CV, we sample that light into pixels. This discretization is what forces us to move from the integral to the sum.
+Example: 8-bit depth maps light intensity into integers from 0 (black) to 255 (white)
+To mathematically discretize a continuous image f(x, y), we multiply it by a 2D Impulse Train s(x, y), which acts as a sampling grid of Dirac delta functions.

@@ -1,0 +1,4 @@
+Keypoint Descriptor, SIFT: Will be covered laterCourtesy: S. Lazebnik
+Divide 16×16 window into 4×4 grid of cells
+Compute an orientation histogram for each cell
+– 16 cells * 8 orientations = 128-dimensional descriptor

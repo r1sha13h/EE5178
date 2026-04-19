@@ -1,0 +1,7 @@
+Harris Detector – Scale Parameters
+The Harris detector requires two scale  parameters:
+a differentiation scale σD for smoothing prior to the  computation of image derivatives,
+&
+an integration scale σI for defining the size of the  Gaussian window (i.e., integrating derivative
+responses).
+Typically, σI=γσD

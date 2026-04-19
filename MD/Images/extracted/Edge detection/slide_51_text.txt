@@ -1,0 +1,2 @@
+Designing an edge detectorCourtesy Juan Carlos Niebles and Ranjay Krishna
+Good detection: the optimal detector must minimize the probability of false positives (detecting spurious edges caused by noise), as well as that of true negatives (missing real edges).

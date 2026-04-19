@@ -1,0 +1,7 @@
+Traditional approaches vs Deep learning
+What’s wrong with the traditional approaches?
+Compositional feature abstraction is missing
+3 key ideas of deep learning
+& manual
+independently
+*slide courtesy, Yoshua Bengio and Yahn Lecun

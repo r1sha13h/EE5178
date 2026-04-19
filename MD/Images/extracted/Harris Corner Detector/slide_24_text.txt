@@ -1,0 +1,2 @@
+Corner Response Example
+Threshold:	-10000 < R < 10000  (neither edges nor corners)

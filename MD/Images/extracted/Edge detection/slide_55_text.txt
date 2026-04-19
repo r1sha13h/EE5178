@@ -1,0 +1,5 @@
+Canny Edge DetectorCourtesy Juan Carlos Niebles and Ranjay Krishna
+This is probably the most widely used edge detector in computer vision.
+Theoretically model step-edges corrupted by additive Gaussian noise.
+Canny has shown that the first derivative of the Gaussian closely approximates the operator that optimizes the product of signal-to-noise ratio and localization.
+Canny, John. "A computational approach to edge detection." IEEE Transactions on pattern analysis and machine intelligence 6 (1986): 679-698.

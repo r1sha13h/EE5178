@@ -1,0 +1,4 @@
+Edge detection using derivativesCourtesy Trucco, Ch. 4 AND Jain et al., Ch. 5
+Points which lie on an edge can be detected by:
+(1) detecting local maxima or minima of the first derivative
+(2) detecting the zero-crossing of the second derivative

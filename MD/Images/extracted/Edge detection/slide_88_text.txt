@@ -1,0 +1,1 @@
+Derivative of Gaussian vs. Laplacian of Gaussian

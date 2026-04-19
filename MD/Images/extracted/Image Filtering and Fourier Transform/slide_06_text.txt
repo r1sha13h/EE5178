@@ -1,0 +1,4 @@
+Gaussian Noise Removal
+To remove gaussian noise, we can use two filters
+Box Filter
+Gaussian Filter

@@ -1,0 +1,2 @@
+Harris Detector - Example
+Map corners on the original image

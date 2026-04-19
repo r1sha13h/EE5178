@@ -1,0 +1,6 @@
+Specification of a MLP
+Number of hidden layers and units in each layer
+Activation function for
+Hidden layers
+Output layers
+Cost function

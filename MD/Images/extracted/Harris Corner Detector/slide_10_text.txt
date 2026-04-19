@@ -1,0 +1,2 @@
+Harris Detector: Intuition
+For nearly constant patches, this will be near 0.  For very distinctive patches, this will be larger.  Hence... we want patches where E(u,v) is LARGE.

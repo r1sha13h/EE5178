@@ -1,0 +1,8 @@
+Style transfer
+*Pic courtesy: http://deepart.io
+*Pic courtesy: Deep Photo Style Transfer, Luan et al. CVPR 2017
+Actual
+Style
+Actual with style
+Neural style transfer by Gatys et al., CVPR’ 16
+Deep Photo Style Transfer by Luan et al., CVPR’ 17

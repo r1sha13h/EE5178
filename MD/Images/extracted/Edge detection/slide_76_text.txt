@@ -1,0 +1,2 @@
+What we will learn today
+Edge detection via Laplacian of Gaussian

@@ -1,0 +1,5 @@
+Harris Detector: Scale Invariance
+All points will  be classified  as edges
+Scaling
+Corner
+Not invariant to scaling (and affine transforms)

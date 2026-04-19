@@ -1,0 +1,12 @@
+Corner Response Map
+R=28
+R=65
+R=104
+R=142
+lambda2
+|R| small  “Flat”
+R < 0 “Edge”
+lambda1
+R=0
+R < 0 “Edge”
+R large  “Corner”

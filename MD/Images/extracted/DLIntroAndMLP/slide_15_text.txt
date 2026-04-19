@@ -1,0 +1,5 @@
+The Perceptron - Rosenblatt (1953)
+The Mark 1 Perceptron
+By Rosenblat
+for digit recognition
+*Pic courtesy, wikipedia

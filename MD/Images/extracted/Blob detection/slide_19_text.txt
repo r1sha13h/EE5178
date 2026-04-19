@@ -1,0 +1,2 @@
+Scale normalizationCourtesy: Forsyth and Ponce
+The response of a derivative of Gaussian filter to a perfect step edge decreases as σ increases

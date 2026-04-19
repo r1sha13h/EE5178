@@ -1,0 +1,2 @@
+Harris Detector - Example
+Take only the points of local maxima of R

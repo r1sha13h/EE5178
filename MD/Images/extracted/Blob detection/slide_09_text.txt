@@ -1,0 +1,3 @@
+Finding CornersCourtesy: Forsyth and Ponce
+Key property: in the region around a corner, image gradient has two or more dominant directions
+This topic will be covered later. Example of this is Harris corners.

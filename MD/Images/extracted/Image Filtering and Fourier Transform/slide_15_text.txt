@@ -1,0 +1,2 @@
+2D Fourier Basis
+The 2D DFT represents an image as a sum of complex exponentials:

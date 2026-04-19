@@ -1,0 +1,13 @@
+Perceptron - Limitations
+Goal: learn the XoR function (f*)
+How to tackle this problem?
+Add a hidden layer with two units
+Use ReLU activation in 1st layer
+W
+U
+y = UTh + c ;
+h = g(Wx+b)=max{0, Wx+b}
+y = UT max{0, Wx+b} + c
+Let,
+ReLU
+*Slide courtesy, Ian Goodfellow et al., deep learning book

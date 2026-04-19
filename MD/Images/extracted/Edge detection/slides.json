@@ -1,0 +1,1735 @@
+[
+  {
+    "slide": 1,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "EE5178: Modern Computer Vision"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 2,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 3,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_03_img_2.png"
+    ]
+  },
+  {
+    "slide": 4,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Definition of edges\u000bCourtesy Trucco, Ch. 4 AND Jain et al., Ch. 5"
+      },
+      {
+        "level": 0,
+        "text": "- Edges are significant local changes of intensity in an image."
+      },
+      {
+        "level": 0,
+        "text": "- Edges typically occur on the boundary between two different regions in an image."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_04_img_2.png"
+    ]
+  },
+  {
+    "slide": 5,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_05_img_2.png"
+    ]
+  },
+  {
+    "slide": 6,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Why do we care about edges?\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "\u2022 Extract information, recognize objects"
+      },
+      {
+        "level": 0,
+        "text": "\u2022 Recover geometry and viewpoint"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_06_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_06_img_3.png"
+    ]
+  },
+  {
+    "slide": 7,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Origins of edges\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_07_img_1.png"
+    ]
+  },
+  {
+    "slide": 8,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Origins of edges\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_08_img_1.png"
+    ]
+  },
+  {
+    "slide": 9,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Origins of edges\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_09_img_1.png"
+    ]
+  },
+  {
+    "slide": 10,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Characterizing edges"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_10_img_2.png"
+    ]
+  },
+  {
+    "slide": 11,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 12,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete Derivative in 1D\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_12_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_12_img_2.png"
+    ]
+  },
+  {
+    "slide": 13,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Computing the first derivative on 1D signals\u000bCourtesy Trucco, Ch. 4 AND Jain et al., Ch. 5"
+      },
+      {
+        "level": 0,
+        "text": "(d)"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_13_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_13_img_2.png"
+    ]
+  },
+  {
+    "slide": 14,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete derivative in 2D\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_14_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_14_img_3.png"
+    ]
+  },
+  {
+    "slide": 15,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_15_img_2.png"
+    ]
+  },
+  {
+    "slide": 16,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_16_img_2.png"
+    ]
+  },
+  {
+    "slide": 17,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete derivative in 2D - Example\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_17_img_1.png"
+    ]
+  },
+  {
+    "slide": 18,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete derivative in 2D - Example\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_18_img_1.png"
+    ]
+  },
+  {
+    "slide": 19,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete derivative in 2D - Example\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Detects edges in Horizontal direction"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_19_img_1.png"
+    ]
+  },
+  {
+    "slide": 20,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete derivative in 2D - Example\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_20_img_1.png"
+    ]
+  },
+  {
+    "slide": 21,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete derivative in 2D - Example\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Detects edges in \u000bVertical direction"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_21_img_1.png"
+    ]
+  },
+  {
+    "slide": 22,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge Detection using 1st Derivative ( Gradients )\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Derivative in x-direction"
+      },
+      {
+        "level": 0,
+        "text": "Derivative in y-direction"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_22_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_22_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_22_img_4.png"
+    ]
+  },
+  {
+    "slide": 23,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 24,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Characterizing edges"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_24_img_2.png"
+    ]
+  },
+  {
+    "slide": 25,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Image gradients"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_25_img_2.png"
+    ]
+  },
+  {
+    "slide": 26,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Finite differences: example"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_26_img_2.png"
+    ]
+  },
+  {
+    "slide": 27,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Intensity profile"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_27_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_27_img_3.png"
+    ]
+  },
+  {
+    "slide": 28,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_28_img_2.png"
+    ]
+  },
+  {
+    "slide": 29,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Some practical issues: Effect of NOISE\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Consider a single row or column of the image"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Plotting intensity as a function of position gives a signal"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Where is the edge?"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_29_img_2.png"
+    ]
+  },
+  {
+    "slide": 30,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Some practical issues: Effect of NOISE\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Finite difference filters respond strongly to"
+      },
+      {
+        "level": 0,
+        "text": "noise"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Generally, the larger the noise the stronger the response"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_30_img_2.png"
+    ]
+  },
+  {
+    "slide": 31,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivatives Amplifies NOISE\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_31_img_1.png"
+    ]
+  },
+  {
+    "slide": 32,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Effect of NOISE: What is to be done?\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Smoothing the image should help, by forcing pixels different to their neighbors (=noise pixels?) to look more like neighbors."
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 33,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Smoothing with different filters\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_33_img_2.png"
+    ]
+  },
+  {
+    "slide": 34,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Solution: smooth first \u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Image -> Smoothen the image -> Take the derivative to detect Edges"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_34_img_2.png"
+    ]
+  },
+  {
+    "slide": 35,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative theorem of convolution - This saves us one operation \u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Image -> Smoothen the image -> Take the derivative to detect Edges"
+      },
+      {
+        "level": 0,
+        "text": "These two steps can be combined."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_35_img_2.png"
+    ]
+  },
+  {
+    "slide": 36,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative theorem of convolution - This saves us one operation \u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Image -> CONVOLVE with APPROPRIATE KERNEL"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_36_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_36_img_3.png"
+    ]
+  },
+  {
+    "slide": 37,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative of Gaussian filter\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_37_img_2.png"
+    ]
+  },
+  {
+    "slide": 38,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative of Gaussian filter\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_38_img_2.png"
+    ]
+  },
+  {
+    "slide": 39,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative of Gaussian filter"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_39_img_2.png"
+    ]
+  },
+  {
+    "slide": 40,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Tradeoff between smoothing at different scales\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Smoothed derivative removes noise, but blurs edge."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_40_img_3.png"
+    ]
+  },
+  {
+    "slide": 41,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Smoothing with a Gaussian\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_41_img_2.png"
+    ]
+  },
+  {
+    "slide": 42,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Effect of \u03c3 on derivatives\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_42_img_2.png"
+    ]
+  },
+  {
+    "slide": 43,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "A basic edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Filter image with x and y derivative of Gaussian"
+      },
+      {
+        "level": 0,
+        "text": "That is, I_x= I*dG/dx an and"
+      },
+      {
+        "level": 0,
+        "text": "Find magnitude of gradient:"
+      },
+      {
+        "level": 0,
+        "text": "Threshold to keep strong edges: if              , then strong edge."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_43_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_43_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_43_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_43_img_5.png"
+    ]
+  },
+  {
+    "slide": 44,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 45,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_45_img_2.png"
+    ]
+  },
+  {
+    "slide": 46,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_46_img_2.png"
+    ]
+  },
+  {
+    "slide": 47,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_47_img_2.png"
+    ]
+  },
+  {
+    "slide": 48,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_48_img_2.png"
+    ]
+  },
+  {
+    "slide": 49,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Sobel operator example (cont.)\u000bCourtesy Digital Image Processing: Bernd Girod"
+      },
+      {
+        "level": 0,
+        "text": "Courtesy Digital Image Processing: Bernd Girod"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_49_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_49_img_3.png"
+    ]
+  },
+  {
+    "slide": 50,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Sobel Filter Problems\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_50_img_2.png"
+    ]
+  },
+  {
+    "slide": 51,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Designing an edge detector\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Good detection: the optimal detector must minimize the probability of false positives (detecting spurious edges caused by noise), as well as that of true negatives (missing real edges)."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_51_img_2.png"
+    ]
+  },
+  {
+    "slide": 52,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Designing an edge detector\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Good detection: the optimal detector must minimize the probability of false positives (detecting spurious edges caused by noise), as well as that of false negatives (missing real edges)."
+      },
+      {
+        "level": 0,
+        "text": "Good localization: the edges detected must be as close as possible to the true edges."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_52_img_2.png"
+    ]
+  },
+  {
+    "slide": 53,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Designing an edge detector\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Good detection: the optimal detector must minimize the probability of false positives (detecting spurious edges caused by noise), as well as that of false negatives (missing real edges)."
+      },
+      {
+        "level": 0,
+        "text": "Good localization: the edges detected must be as close as possible to the true edges."
+      },
+      {
+        "level": 0,
+        "text": "Single response: the detector must return one point only for each true edge point; that is, minimize the number of local maxima around the true edge."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_53_img_2.png"
+    ]
+  },
+  {
+    "slide": 54,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 55,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Canny Edge Detector\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "This is probably the most widely used edge detector in computer vision."
+      },
+      {
+        "level": 0,
+        "text": "Theoretically model step-edges corrupted by additive Gaussian noise."
+      },
+      {
+        "level": 0,
+        "text": "Canny has shown that the first derivative of the Gaussian closely approximates the operator that optimizes the product of signal-to-noise ratio and localization."
+      },
+      {
+        "level": 0,
+        "text": "Canny, John. \"A computational approach to edge detection.\" IEEE Transactions on pattern analysis and machine intelligence 6 (1986): 679-698."
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 56,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Canny Edge Detector\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Suppress Noise"
+      },
+      {
+        "level": 0,
+        "text": "Compute gradient magnitude and direction"
+      },
+      {
+        "level": 0,
+        "text": "Apply Non-Maximum Suppression"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Assures minimal response"
+      },
+      {
+        "level": 0,
+        "text": "Use hysteresis and connectivity analysis to detect edges"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 57,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Example"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_57_img_1.png"
+    ]
+  },
+  {
+    "slide": 58,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Canny Edge Detector\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Suppress Noise"
+      },
+      {
+        "level": 0,
+        "text": "Compute gradient magnitude and direction"
+      },
+      {
+        "level": 0,
+        "text": "Apply Non-Maximum Suppression"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Assures minimal response"
+      },
+      {
+        "level": 0,
+        "text": "Use hysteresis and connectivity analysis to detect edges"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 59,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative of Gaussian filter\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_59_img_2.png"
+    ]
+  },
+  {
+    "slide": 60,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Compute gradients (DoG)\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_60_img_2.png"
+    ]
+  },
+  {
+    "slide": 61,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Suppress Noise"
+      },
+      {
+        "level": 0,
+        "text": "Compute gradient magnitude and direction"
+      },
+      {
+        "level": 0,
+        "text": "Apply Non-Maximum Suppression"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Assures minimal response"
+      },
+      {
+        "level": 0,
+        "text": "Use hysteresis and connectivity analysis to detect edges"
+      },
+      {
+        "level": 0,
+        "text": "Canny Edge Detector\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 62,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Get orientation at each pixel\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_62_img_2.png"
+    ]
+  },
+  {
+    "slide": 63,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Compute gradients (DoG)\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_63_img_2.png"
+    ]
+  },
+  {
+    "slide": 64,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Suppress Noise"
+      },
+      {
+        "level": 0,
+        "text": "Compute gradient magnitude and direction"
+      },
+      {
+        "level": 0,
+        "text": "Apply Non-Maximum Suppression"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Assures minimal response"
+      },
+      {
+        "level": 0,
+        "text": "Use hysteresis and connectivity analysis to detect edges"
+      },
+      {
+        "level": 0,
+        "text": "Canny Edge Detector\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 65,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Apply Non-Maximum Suppression\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "Edge occurs where gradient reaches a maxima"
+      },
+      {
+        "level": 0,
+        "text": "Suppress non-maxima gradient even if it passes threshold"
+      },
+      {
+        "level": 0,
+        "text": "Only eight angle directions possible"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Suppress all pixels in each direction which are not maxima \u2013 Do this in each marked pixel neighborhood"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 66,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Remove spurious gradients\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_66_img_2.png"
+    ]
+  },
+  {
+    "slide": 67,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Non Maxima Suppression\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_67_img_1.png"
+    ]
+  },
+  {
+    "slide": 68,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Canny Edge Detector: Non Maxima Suppression\u000bCourtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_68_img_1.png"
+    ]
+  },
+  {
+    "slide": 69,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Suppress Noise"
+      },
+      {
+        "level": 0,
+        "text": "Compute gradient magnitude and direction"
+      },
+      {
+        "level": 0,
+        "text": "Apply Non-Maximum Suppression"
+      },
+      {
+        "level": 0,
+        "text": "\u2013 Assures minimal response"
+      },
+      {
+        "level": 0,
+        "text": "Use hysteresis and connectivity analysis to detect edges"
+      },
+      {
+        "level": 0,
+        "text": "Canny Edge Detector\u000bCourtesy Courtesy Juan Carlos Niebles and Ranjay Krishna"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 70,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Canny Edge Detector: Double thresholding using Hysteresis thresholding\u000bCourtesy : Bernd Girod;  Juan Carlos Niebles and Ranjay Krishna"
+      },
+      {
+        "level": 0,
+        "text": "If the gradient M[x,y] at a pixel is"
+      },
+      {
+        "level": 0,
+        "text": "above \u03b8High, declare it as an \u2018strong edge pixel\u2019"
+      },
+      {
+        "level": 0,
+        "text": "below \u03b8Low, declare it as a \u201cnon-edge-pixel\u201d"
+      },
+      {
+        "level": 0,
+        "text": "between \u03b8Low and \u03b8High \u2013 Consider its neighbors iteratively then declare it an \u201cedge pixel\u201d if it is connected to an \u2018strong edge pixel\u2019 directly or via pixels between Low and High."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_70_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_70_img_3.png"
+    ]
+  },
+  {
+    "slide": 71,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Final Canny Edges"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_71_img_2.png"
+    ]
+  },
+  {
+    "slide": 72,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_72_img_2.png"
+    ]
+  },
+  {
+    "slide": 73,
+    "title": "",
+    "texts": [],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_73_img_2.png"
+    ]
+  },
+  {
+    "slide": 74,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Canny Edge Detector - Example\u000bCourtesy medium.com"
+      },
+      {
+        "level": 0,
+        "text": "Small \ud835\uded4"
+      },
+      {
+        "level": 0,
+        "text": "Large \ud835\uded4"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_74_img_2.gif"
+    ]
+  },
+  {
+    "slide": 75,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we learnt:"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Image gradients"
+      },
+      {
+        "level": 0,
+        "text": "A simple edge detection"
+      },
+      {
+        "level": 0,
+        "text": "Sobel edge detector"
+      },
+      {
+        "level": 0,
+        "text": "Canny edge detector"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 76,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection via Laplacian of Gaussian"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 77,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge detection using derivatives"
+      },
+      {
+        "level": 0,
+        "text": "Image Source"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_77_img_1.png"
+    ]
+  },
+  {
+    "slide": 78,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge detection using derivatives\u000bCourtesy Trucco, Ch. 4 AND Jain et al., Ch. 5"
+      },
+      {
+        "level": 0,
+        "text": "Points which lie on an edge can be detected by:"
+      },
+      {
+        "level": 0,
+        "text": "(1) detecting local maxima or minima of the first derivative"
+      },
+      {
+        "level": 0,
+        "text": "(2) detecting the zero-crossing of the second derivative"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_78_img_2.png"
+    ]
+  },
+  {
+    "slide": 79,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge detection using 2nd derivative\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_79_img_1.png"
+    ]
+  },
+  {
+    "slide": 80,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge Detection using 2nd derivative\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_80_img_1.png"
+    ]
+  },
+  {
+    "slide": 81,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Computing 2nd derivative for 1D signals\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_81_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_81_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_81_img_3.png"
+    ]
+  },
+  {
+    "slide": 82,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge detection using zero crossing of 2nd derivative"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_82_img_1.png"
+    ]
+  },
+  {
+    "slide": 83,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Computing 2nd derivative for 1D signals - Example\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_83_img_1.png"
+    ]
+  },
+  {
+    "slide": 84,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Laplacian Edge Detector\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_84_img_1.png"
+    ]
+  },
+  {
+    "slide": 85,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Laplacian Edge Detector\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_85_img_1.png"
+    ]
+  },
+  {
+    "slide": 86,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Laplacian\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_86_img_1.png"
+    ]
+  },
+  {
+    "slide": 87,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Zero crossing of Laplacian"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_87_img_2.png"
+    ]
+  },
+  {
+    "slide": 88,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative of Gaussian vs. Laplacian of Gaussian"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_88_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_88_img_3.png"
+    ]
+  },
+  {
+    "slide": 89,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Derivative of Gaussian vs. Laplacian of Gaussian\u000bCourtesy Saad J Bedros"
+      },
+      {
+        "level": 0,
+        "text": "1st derivative of Gaussian kernel (DoG)"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_89_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_89_img_3.png"
+    ]
+  },
+  {
+    "slide": 90,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Laplacian of Gaussian"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_90_img_2.png"
+    ]
+  },
+  {
+    "slide": 91,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete approximation of Laplacian of Gaussian"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_91_img_2.png"
+    ]
+  },
+  {
+    "slide": 92,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Zero-crossings of LoG"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_92_img_2.png"
+    ]
+  },
+  {
+    "slide": 93,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Zero crossings of LoG - gradient based thresholding"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_93_img_2.png"
+    ]
+  },
+  {
+    "slide": 94,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Gradient vs LoG\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_94_img_1.png"
+    ]
+  },
+  {
+    "slide": 95,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Gradient vs LoG\u000bCourtesy Saad J Bedros"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Edge detection/slide_95_img_0.png"
+    ]
+  },
+  {
+    "slide": 96,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we will learn today"
+      },
+      {
+        "level": 0,
+        "text": "Edge detection via Laplacian of Gaussian"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  }
+]

@@ -1,0 +1,5 @@
+Edge Discontinuity
+Since DFT mathematically assumes that your image is one "tile" in an infinitely repeating 2D mosaic.
+In real images, the left edge rarely matches the right edge. When the DFT "tiles" the image, a sharp intensity jump (discontinuity) occurs at every boundary.
+This manifests as a bright "Spectral Cross" (horizontal and vertical lines) through the center of your frequency plot.
+We multiply the image by a Window Function w(x,y) that smoothly tapers the pixel values to zero as they approach the edges. This makes the tiled transition seamless.

@@ -1,0 +1,2 @@
+Derivative of Gaussian vs. Laplacian of GaussianCourtesy Saad J Bedros
+1st derivative of Gaussian kernel (DoG)

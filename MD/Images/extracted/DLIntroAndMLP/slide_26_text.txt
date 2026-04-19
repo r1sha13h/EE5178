@@ -1,0 +1,7 @@
+What we learnt till now:
+Network specification
+Number of hidden layers and units in each layer
+Activation function for
+Hidden layers
+Output layers
+Cost function

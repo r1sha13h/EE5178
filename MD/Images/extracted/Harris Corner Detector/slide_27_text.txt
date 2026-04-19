@@ -1,0 +1,2 @@
+Harris Detector - Example
+Compute corner response R

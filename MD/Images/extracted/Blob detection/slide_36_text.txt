@@ -1,0 +1,4 @@
+What we covered today:
+Scale-space blob detectorCourtesy: S. Lazebnik
+Convolve image with scale-normalized Laplacian at several scales
+Find maxima of squared Laplacian response in scale-space

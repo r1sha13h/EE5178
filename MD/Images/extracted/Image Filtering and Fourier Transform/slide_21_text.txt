@@ -1,0 +1,3 @@
+Properties of Fourier Transform
+Rotation:
+If an image is rotated by an angle in the spatial domain, its frequency spectrum F(u, v) rotates by the exact same angle in the frequency domain.

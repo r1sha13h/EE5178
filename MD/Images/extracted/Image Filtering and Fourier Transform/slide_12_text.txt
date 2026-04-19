@@ -1,0 +1,5 @@
+The Frequency Perspective in 2D Vision
+The 2D Fourier Transform decomposes an image into a weighted sum of sinusoidal plane waves.
+It shifts our perspective from where a intensity is (Spatial Domain) to how fast intensities change (Frequency Domain).
+To move from intensity f(x, y) to frequencies F(u,v), we use the
+2D Fourier Transform.

@@ -1,0 +1,6 @@
+What we will learn today
+Edge detection
+Image gradients
+A simple edge detection
+Sobel edge detector
+Canny edge detector

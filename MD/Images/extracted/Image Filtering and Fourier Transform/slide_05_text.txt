@@ -1,0 +1,5 @@
+Types of Noises: Shot Noise
+Also known as Poisson Noise, quantum noise
+Occurs due to variations in number of photons incident
+Randomness forms a Poisson distribution
+https://en.wikipedia.org/wiki/Shot_noise#

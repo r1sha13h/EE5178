@@ -1,0 +1,5 @@
+Activation functions for Output units
+Now, say we want to do multi-class classification (K classes)
+Output should be K probabilities,
+pk = p(class = k|x) ∀ k = 1 to K
+Can we use K sigmoid units?

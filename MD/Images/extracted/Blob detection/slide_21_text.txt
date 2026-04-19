@@ -1,0 +1,1 @@
+Scale-invariant features: BlobsCourtesy: Forsyth and Ponce

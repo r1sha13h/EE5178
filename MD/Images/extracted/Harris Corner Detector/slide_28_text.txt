@@ -1,0 +1,2 @@
+Harris Detector - Example
+Find points with large corner response: R>threshold

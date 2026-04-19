@@ -1,0 +1,20 @@
+Perceptron - Limitations
+Goal: learn the XoR function (f*)
+How to tackle this problem?
+Add a hidden layer with two units
+h = f.(1)(x; W, b)
+W
+U
+y = f.(2)(h; U, c)
+y = f.(2)( f.(1)(x) )
+What should f.(1) compute?
+If its linear again the composition still remains linear
+f.(2)(h) = UTh and  h = Wx
+y = UTWx = W’x
+f.(1) should be nonlinear to extract useful features
+g is referred as activation function commonly
+h = f.(1)(x; W, b) = g(Wx+b)
+We will use ReLU here
+Rectified Linear Unit (widely used)
+g(z)  = max{0,z}
+*Slide courtesy, Ian Goodfellow et al., deep learning book

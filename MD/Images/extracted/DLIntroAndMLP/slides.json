@@ -1,0 +1,1026 @@
+[
+  {
+    "slide": 1,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Quick review of Deep Learning"
+      },
+      {
+        "level": 0,
+        "text": "EE 5178"
+      },
+      {
+        "level": 0,
+        "text": "Kaushik Mitra"
+      },
+      {
+        "level": 0,
+        "text": "Depart. Of Electrical Engineering, IIT Madras"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 2,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Machine learning"
+      },
+      {
+        "level": 0,
+        "text": "Supervised learning:"
+      },
+      {
+        "level": 0,
+        "text": "Unsupervised learning:"
+      },
+      {
+        "level": 0,
+        "text": "Goal: Learning from the data with minimal intervention from the user"
+      },
+      {
+        "level": 0,
+        "text": "Learns a mapping b/w input and output pairs (xi,yi) e.g. image classification"
+      },
+      {
+        "level": 0,
+        "text": "Applications: image classification, object detection, scene recognition"
+      },
+      {
+        "level": 0,
+        "text": "Given only data \u2018x\u2019 learn the inherent underlying structure"
+      },
+      {
+        "level": 0,
+        "text": "Consider a 64x64 binary image"
+      },
+      {
+        "level": 0,
+        "text": "Applications: clustering, dimensionality reduction, density estimation"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_02_img_7.jpg",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_02_img_9.jpg"
+    ]
+  },
+  {
+    "slide": 3,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Traditional approaches"
+      },
+      {
+        "level": 0,
+        "text": "Manual feature extraction (SIFT/HOG)"
+      },
+      {
+        "level": 0,
+        "text": "Classifier is learned independent of feature extraction"
+      },
+      {
+        "level": 0,
+        "text": "*slide courtesy, Yoshua Bengio and Yahn Lecun"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_03_img_1.png"
+    ]
+  },
+  {
+    "slide": 4,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Traditional approaches vs Deep learning"
+      },
+      {
+        "level": 0,
+        "text": "What\u2019s wrong with the traditional approaches?"
+      },
+      {
+        "level": 0,
+        "text": "Compositional feature abstraction is missing"
+      },
+      {
+        "level": 0,
+        "text": "3 key ideas of deep learning"
+      },
+      {
+        "level": 0,
+        "text": "& manual"
+      },
+      {
+        "level": 0,
+        "text": "independently"
+      },
+      {
+        "level": 0,
+        "text": "*slide courtesy, Yoshua Bengio and Yahn Lecun"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_04_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_04_img_3.png"
+    ]
+  },
+  {
+    "slide": 5,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Image Classification"
+      },
+      {
+        "level": 0,
+        "text": "Surpassed Human Performance"
+      },
+      {
+        "level": 0,
+        "text": "LeNet by Lecun et al. 1998 (MNIST)"
+      },
+      {
+        "level": 0,
+        "text": "AlexNet by Krish et al. NIPS\u2019 12"
+      },
+      {
+        "level": 0,
+        "text": "VGGNet by Simonyan et al. ICLR\u2019 15"
+      },
+      {
+        "level": 0,
+        "text": "GoogLeNet by Szegedy et al. CVPR\u2019 15"
+      },
+      {
+        "level": 0,
+        "text": "ResNet by He et al., CVPR\u2019 17 best paper"
+      },
+      {
+        "level": 0,
+        "text": "*pic courtesy: Kaiming He"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_05_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_05_img_2.png"
+    ]
+  },
+  {
+    "slide": 6,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Object Detection"
+      },
+      {
+        "level": 0,
+        "text": "pic courtesy: http://mrulafi.blogspot.in/2016_05_01_archive.html"
+      },
+      {
+        "level": 0,
+        "text": "OverFeat by  Sermanet et al., ICLR\u2019 14 (NYU)"
+      },
+      {
+        "level": 0,
+        "text": "R-CNN by Girshick et al., CVPR\u2019 14 (UCB)"
+      },
+      {
+        "level": 0,
+        "text": "SPP by He et al., ECCV\u2019 14 (MSR)"
+      },
+      {
+        "level": 0,
+        "text": "Fast R-CNN by Girshick et al., arxiv (MSR)"
+      },
+      {
+        "level": 0,
+        "text": "Faster R-CNN by Ren et al., NIPS\u2019 15 (MSR)"
+      },
+      {
+        "level": 0,
+        "text": "YOLO by Redmon et al., arxiv 2015"
+      },
+      {
+        "level": 0,
+        "text": "YOLO 9000 by Redmon et al., CVPR\u2019 17"
+      },
+      {
+        "level": 0,
+        "text": "Faster RCNN detections"
+      },
+      {
+        "level": 0,
+        "text": "YOLO 9000 detections"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_06_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_06_img_4.jpg"
+    ]
+  },
+  {
+    "slide": 7,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Image Segmentation"
+      },
+      {
+        "level": 0,
+        "text": "*Pic courtesy: Kundu et al. CVPR 2016 on City scapes dataset"
+      },
+      {
+        "level": 0,
+        "text": "FCN by Long et al. CVPR\u2019 15"
+      },
+      {
+        "level": 0,
+        "text": "DeepLab by Chen et al. arxiv 2015"
+      },
+      {
+        "level": 0,
+        "text": "CRFS as RNNs by Zheng et al. ICCV\u2019 15"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_07_img_1.jpg"
+    ]
+  },
+  {
+    "slide": 8,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Style transfer"
+      },
+      {
+        "level": 0,
+        "text": "*Pic courtesy: http://deepart.io"
+      },
+      {
+        "level": 0,
+        "text": "*Pic courtesy: Deep Photo Style Transfer, Luan et al. CVPR 2017"
+      },
+      {
+        "level": 0,
+        "text": "Actual"
+      },
+      {
+        "level": 0,
+        "text": "Style"
+      },
+      {
+        "level": 0,
+        "text": "Actual with style"
+      },
+      {
+        "level": 0,
+        "text": "Neural style transfer by Gatys et al., CVPR\u2019 16"
+      },
+      {
+        "level": 0,
+        "text": "Deep Photo Style Transfer by Luan et al., CVPR\u2019 17"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_08_img_5.jpg"
+    ]
+  },
+  {
+    "slide": 9,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Artistic applications"
+      },
+      {
+        "level": 0,
+        "text": "Image-to-Image Translation with Conditional Adversarial Nets by Isola et al., CVPR\u2019 17"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_09_img_1.png"
+    ]
+  },
+  {
+    "slide": 10,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Image, Video and Audio Generation"
+      },
+      {
+        "level": 0,
+        "text": "PixelRNN/CNN by Gregor et al.,"
+      },
+      {
+        "level": 0,
+        "text": "ICML\u2019 16 Best paper (Samples from ImageNet)"
+      },
+      {
+        "level": 0,
+        "text": "DCGAN Chintala et al. ICLR\u2019 16"
+      },
+      {
+        "level": 0,
+        "text": "Sample bedroom images"
+      },
+      {
+        "level": 0,
+        "text": "WaveNet for audio synthesis by Oord et al. 2016, Deepmind"
+      },
+      {
+        "level": 0,
+        "text": "Check out wavenet\u2019s generated music"
+      },
+      {
+        "level": 0,
+        "text": "piano clips"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_10_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_10_img_2.gif",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_10_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_10_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_10_img_5.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_10_img_6.jpg"
+    ]
+  },
+  {
+    "slide": 11,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Basic Neural Networks"
+      },
+      {
+        "level": 0,
+        "text": "Multi-layer perceptrons (MLP) is a feed forward neural network with hidden layers"
+      },
+      {
+        "level": 0,
+        "text": "Hidden layers increase abstraction"
+      },
+      {
+        "level": 0,
+        "text": "*pic courtesy, Sancho course"
+      },
+      {
+        "level": 0,
+        "text": "Universal Approximation Theorem:"
+      },
+      {
+        "level": 0,
+        "text": "simple neural networks can represent a wide variety of interesting functions when given appropriate parameters"
+      },
+      {
+        "level": 0,
+        "text": "hence, better to have more hidden layers than a single layer with large number of neurons"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 12,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Basic Neural Networks"
+      },
+      {
+        "level": 0,
+        "text": "What we will learn in the course about Neural Networks?"
+      },
+      {
+        "level": 0,
+        "text": "McCulloch and Pits model"
+      },
+      {
+        "level": 0,
+        "text": "Rosenblatt\u2019s perceptron"
+      },
+      {
+        "level": 0,
+        "text": "Introduction"
+      },
+      {
+        "level": 0,
+        "text": "Perceptrons"
+      },
+      {
+        "level": 0,
+        "text": "Geometry and linear separability"
+      },
+      {
+        "level": 0,
+        "text": "XoR problem"
+      },
+      {
+        "level": 0,
+        "text": "Multi-layer perceptron (MLP)"
+      },
+      {
+        "level": 0,
+        "text": "Training MLPs"
+      },
+      {
+        "level": 0,
+        "text": "Error back propagation"
+      },
+      {
+        "level": 0,
+        "text": "Loss functions"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 13,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Introduction to Neural Networks"
+      },
+      {
+        "level": 0,
+        "text": "Perceptron, XOR Problem, Multi-layer Perceptron (MLP), Cost Functions, Activation functions and Output units"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_13_img_0.jpg"
+    ]
+  },
+  {
+    "slide": 14,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "McCulloch - Pits model"
+      },
+      {
+        "level": 0,
+        "text": "NOR gate"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_14_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_14_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_14_img_5.png"
+    ]
+  },
+  {
+    "slide": 15,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "The Perceptron - Rosenblatt (1953)"
+      },
+      {
+        "level": 0,
+        "text": "The Mark 1 Perceptron"
+      },
+      {
+        "level": 0,
+        "text": "By Rosenblat"
+      },
+      {
+        "level": 0,
+        "text": "for digit recognition"
+      },
+      {
+        "level": 0,
+        "text": "*Pic courtesy, wikipedia"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_15_img_1.jpg",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_15_img_3.png"
+    ]
+  },
+  {
+    "slide": 16,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Perceptron - geometrical interpretation"
+      },
+      {
+        "level": 0,
+        "text": ", What does this inequality imply in 2D case?"
+      },
+      {
+        "level": 0,
+        "text": "Half plane"
+      },
+      {
+        "level": 0,
+        "text": "Any function that is linearly separable can be"
+      },
+      {
+        "level": 0,
+        "text": "computed by a perceptron"
+      },
+      {
+        "level": 0,
+        "text": "TABLE: [[\"\\ud835\\udd4f\", \"AND\"], [\"(0, 0)\", \"0\"], [\"(0, 1)\", \"0\"], [\"(1, 0)\", \"0\"], [\"(1, 1)\", \"1\"]]"
+      },
+      {
+        "level": 0,
+        "text": "x1 + x2 > 1.5"
+      },
+      {
+        "level": 0,
+        "text": "w1 = 1, w2 = 1 and \u03bc = 1.5"
+      },
+      {
+        "level": 0,
+        "text": "Solve for W, \u03bc:"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_16_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_16_img_2.png"
+    ]
+  },
+  {
+    "slide": 17,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Perceptron - Limitations"
+      },
+      {
+        "level": 0,
+        "text": "Goal: learn the XoR function (f*)"
+      },
+      {
+        "level": 0,
+        "text": "TABLE: [[\"\\ud835\\udd4f\", \"f*\"], [\"(0, 0)\", \"0\"], [\"(0, 1)\", \"1\"], [\"(1, 0)\", \"1\"], [\"(1, 1)\", \"0\"]]"
+      },
+      {
+        "level": 0,
+        "text": "The data is not linearly separable"
+      },
+      {
+        "level": 0,
+        "text": "*Slide courtesy, Ian Goodfellow et al., deep learning book"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_17_img_3.png"
+    ]
+  },
+  {
+    "slide": 18,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Perceptron - Limitations"
+      },
+      {
+        "level": 0,
+        "text": "Goal: learn the XoR function (f*)"
+      },
+      {
+        "level": 0,
+        "text": "How to tackle this problem?"
+      },
+      {
+        "level": 0,
+        "text": "Add a hidden layer with two units"
+      },
+      {
+        "level": 0,
+        "text": "h = f.(1)(x; W, b)"
+      },
+      {
+        "level": 0,
+        "text": "W"
+      },
+      {
+        "level": 0,
+        "text": "U"
+      },
+      {
+        "level": 0,
+        "text": "y = f.(2)(h; U, c)"
+      },
+      {
+        "level": 0,
+        "text": "y = f.(2)( f.(1)(x) )"
+      },
+      {
+        "level": 0,
+        "text": "What should f.(1) compute?"
+      },
+      {
+        "level": 0,
+        "text": "If its linear again the composition still remains linear"
+      },
+      {
+        "level": 0,
+        "text": "f.(2)(h) = UTh and  h = Wx"
+      },
+      {
+        "level": 0,
+        "text": "y = UTWx = W\u2019x"
+      },
+      {
+        "level": 0,
+        "text": "f.(1) should be nonlinear to extract useful features"
+      },
+      {
+        "level": 0,
+        "text": "g is referred as activation function commonly"
+      },
+      {
+        "level": 0,
+        "text": "h = f.(1)(x; W, b) = g(Wx+b)"
+      },
+      {
+        "level": 0,
+        "text": "We will use ReLU here"
+      },
+      {
+        "level": 1,
+        "text": "Rectified Linear Unit (widely used)"
+      },
+      {
+        "level": 1,
+        "text": "g(z)  = max{0,z}"
+      },
+      {
+        "level": 0,
+        "text": "*Slide courtesy, Ian Goodfellow et al., deep learning book"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_18_img_0.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_18_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_18_img_6.png"
+    ]
+  },
+  {
+    "slide": 19,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Perceptron - Limitations"
+      },
+      {
+        "level": 0,
+        "text": "Goal: learn the XoR function (f*)"
+      },
+      {
+        "level": 0,
+        "text": "How to tackle this problem?"
+      },
+      {
+        "level": 0,
+        "text": "Add a hidden layer with two units"
+      },
+      {
+        "level": 0,
+        "text": "Use ReLU activation in 1st layer"
+      },
+      {
+        "level": 0,
+        "text": "W"
+      },
+      {
+        "level": 0,
+        "text": "U"
+      },
+      {
+        "level": 0,
+        "text": "y = UTh + c ;"
+      },
+      {
+        "level": 0,
+        "text": "h = g(Wx+b)=max{0, Wx+b}"
+      },
+      {
+        "level": 0,
+        "text": "y = UT max{0, Wx+b} + c"
+      },
+      {
+        "level": 0,
+        "text": "Let,"
+      },
+      {
+        "level": 0,
+        "text": "ReLU"
+      },
+      {
+        "level": 0,
+        "text": "*Slide courtesy, Ian Goodfellow et al., deep learning book"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_19_img_12.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_19_img_13.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_19_img_4.png"
+    ]
+  },
+  {
+    "slide": 20,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Multi-layer Perceptrons (MLP)"
+      },
+      {
+        "level": 0,
+        "text": "With more hidden units network is more expressible"
+      },
+      {
+        "level": 0,
+        "text": "A typical feed forward neural network"
+      },
+      {
+        "level": 0,
+        "text": "h1"
+      },
+      {
+        "level": 0,
+        "text": "h = f(Wx + b1);"
+      },
+      {
+        "level": 0,
+        "text": "y = g(Uh + b2)"
+      },
+      {
+        "level": 0,
+        "text": "*Pic courtesy, Yoshua Bengio"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 21,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Specification of a MLP"
+      },
+      {
+        "level": 0,
+        "text": "Number of hidden layers and units in each layer"
+      },
+      {
+        "level": 0,
+        "text": "Activation function for"
+      },
+      {
+        "level": 1,
+        "text": "Hidden layers"
+      },
+      {
+        "level": 1,
+        "text": "Output layers"
+      },
+      {
+        "level": 0,
+        "text": "Cost function"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_21_img_2.png"
+    ]
+  },
+  {
+    "slide": 22,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Activation functions for hidden layers"
+      },
+      {
+        "level": 0,
+        "text": "h = g(Wx+b);"
+      },
+      {
+        "level": 0,
+        "text": "Affine transformation followed by activation function, g"
+      },
+      {
+        "level": 0,
+        "text": "g(z)  = max{0,z}, ReLU"
+      },
+      {
+        "level": 0,
+        "text": "g(z)  = \u03c3(z), sigmoid"
+      },
+      {
+        "level": 0,
+        "text": "tanh(z)  = 2\u03c3(2z) - 1"
+      },
+      {
+        "level": 0,
+        "text": "Very important factor in learning features"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_22_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_22_img_6.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_22_img_9.jpg"
+    ]
+  },
+  {
+    "slide": 23,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Activation functions for Output units"
+      },
+      {
+        "level": 0,
+        "text": "Linear units for real valued outputs"
+      },
+      {
+        "level": 1,
+        "text": "Activation function is left to be linear"
+      },
+      {
+        "level": 1,
+        "text": "Given features h,"
+      },
+      {
+        "level": 1,
+        "text": "Most commonly used with regression tasks"
+      },
+      {
+        "level": 0,
+        "text": "y\u2019 = Wh+b"
+      },
+      {
+        "level": 0,
+        "text": "Say you want to do binary classification"
+      },
+      {
+        "level": 1,
+        "text": "What kind of distribution describes output? Bernouli"
+      },
+      {
+        "level": 1,
+        "text": "How to constrain the output - valid probability?"
+      },
+      {
+        "level": 0,
+        "text": "Can you use linear activation?"
+      },
+      {
+        "level": 1,
+        "text": "What is the problem?"
+      },
+      {
+        "level": 0,
+        "text": "Not amenable for gradient based learning"
+      },
+      {
+        "level": 1,
+        "text": "Instead, use sigmoid unit - output \u220a [0,1]"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_23_img_5.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_23_img_9.png"
+    ]
+  },
+  {
+    "slide": 24,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Activation functions for Output units"
+      },
+      {
+        "level": 0,
+        "text": "Now, say we want to do multi-class classification (K classes)"
+      },
+      {
+        "level": 1,
+        "text": "Output should be K probabilities,"
+      },
+      {
+        "level": 0,
+        "text": "pk = p(class = k|x) \u2200 k = 1 to K"
+      },
+      {
+        "level": 1,
+        "text": "Can we use K sigmoid units?"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 25,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Cost functions"
+      },
+      {
+        "level": 0,
+        "text": "For regression,"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_25_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_25_img_3.png"
+    ]
+  },
+  {
+    "slide": 26,
+    "title": "",
+    "texts": [
+      {
+        "level": 0,
+        "text": "What we learnt till now:"
+      },
+      {
+        "level": 0,
+        "text": "Network specification"
+      },
+      {
+        "level": 1,
+        "text": "Number of hidden layers and units in each layer"
+      },
+      {
+        "level": 1,
+        "text": "Activation function for"
+      },
+      {
+        "level": 2,
+        "text": "Hidden layers"
+      },
+      {
+        "level": 2,
+        "text": "Output layers"
+      },
+      {
+        "level": 1,
+        "text": "Cost function"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_26_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/DLIntroAndMLP/slide_26_img_4.png"
+    ]
+  }
+]

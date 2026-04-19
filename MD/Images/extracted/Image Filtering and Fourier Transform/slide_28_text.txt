@@ -1,0 +1,3 @@
+Computational cost of DFT
+The standard DFT is a "brute force" approach.
+To find the value of just one frequency point (u,v), the algorithm must sum up the contributions from every single pixel in the original N x N image.

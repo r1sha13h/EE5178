@@ -1,0 +1,2 @@
+Computing the first derivative on 1D signalsCourtesy Trucco, Ch. 4 AND Jain et al., Ch. 5
+(d)

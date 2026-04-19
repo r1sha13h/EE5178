@@ -1,0 +1,9 @@
+Machine learning
+Supervised learning:
+Unsupervised learning:
+Goal: Learning from the data with minimal intervention from the user
+Learns a mapping b/w input and output pairs (xi,yi) e.g. image classification
+Applications: image classification, object detection, scene recognition
+Given only data ‘x’ learn the inherent underlying structure
+Consider a 64x64 binary image
+Applications: clustering, dimensionality reduction, density estimation

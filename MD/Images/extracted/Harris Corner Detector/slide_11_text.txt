@@ -1,0 +1,6 @@
+Taylor Series for 2D Functions
+First partial derivatives
+Second partial derivatives
+Third partial derivatives
+(Higher order terms)
+First order approx

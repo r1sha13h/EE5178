@@ -1,0 +1,7 @@
+Multi-layer Perceptrons (MLP)
+With more hidden units network is more expressible
+A typical feed forward neural network
+h1
+h = f(Wx + b1);
+y = g(Uh + b2)
+*Pic courtesy, Yoshua Bengio

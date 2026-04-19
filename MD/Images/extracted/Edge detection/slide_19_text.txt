@@ -1,0 +1,2 @@
+Discrete derivative in 2D - ExampleCourtesy Juan Carlos Niebles and Ranjay Krishna
+Detects edges in Horizontal direction

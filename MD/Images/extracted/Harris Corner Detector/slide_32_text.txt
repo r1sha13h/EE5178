@@ -1,0 +1,8 @@
+Invariance to Geometric/Photometric Changes
+Is the Harris detector invariant to geometric and  photometric changes?
+Geometric
+Rotation
+Scale
+Affine
+Photometric
+Affine intensity change: I(x,y)  a I(x,y) + b

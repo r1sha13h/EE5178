@@ -1,0 +1,1089 @@
+[
+  {
+    "slide": 1,
+    "title": "Image Filtering and Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Image Filtering and Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "EE5178 - Modern Computer Vision"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 2,
+    "title": "Types of Noises in Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Types of Noises in Images"
+      },
+      {
+        "level": 0,
+        "text": "Sources of Noise"
+      },
+      {
+        "level": 1,
+        "text": "Capture Noise: Noise in the environment of the scene captured"
+      },
+      {
+        "level": 2,
+        "text": "Lighting (high lit and low lit)"
+      },
+      {
+        "level": 2,
+        "text": "Sensor (temperature fluctuations, electrical interference)"
+      },
+      {
+        "level": 2,
+        "text": "Lens (dust, fog etc.)"
+      },
+      {
+        "level": 1,
+        "text": "Sampling Noise: Continuous Real World Scene to Discrete Pixels. Can cause aliasing effects"
+      },
+      {
+        "level": 1,
+        "text": "Processing Noise: Noise introduced when processing images due to mathematical approximations"
+      },
+      {
+        "level": 1,
+        "text": "Image Compression Noise: JPEG Lossy Compression removes finer details"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_02_img_2.png"
+    ]
+  },
+  {
+    "slide": 3,
+    "title": "Types of Noises in Images: Salt and Pepper Noise",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Types of Noises in Images: Salt and Pepper Noise"
+      },
+      {
+        "level": 0,
+        "text": "Also known as Impulse Noise"
+      },
+      {
+        "level": 0,
+        "text": "Random white and black pixels scattered across the image"
+      },
+      {
+        "level": 0,
+        "text": "Source being faulty camera sensors majorly"
+      },
+      {
+        "level": 0,
+        "text": "https://en.wikipedia.org/wiki/Image_noise"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_03_img_2.png"
+    ]
+  },
+  {
+    "slide": 4,
+    "title": "Types of Noises in Images: Gaussian Noise",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Types of Noises in Images: Gaussian Noise"
+      },
+      {
+        "level": 0,
+        "text": "Most common type of noise"
+      },
+      {
+        "level": 0,
+        "text": "Caused by lighting effects, sensor limitations and electronic interference"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_04_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_04_img_3.png"
+    ]
+  },
+  {
+    "slide": 5,
+    "title": "Types of Noises: Shot Noise",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Types of Noises: Shot Noise"
+      },
+      {
+        "level": 0,
+        "text": "Also known as Poisson Noise, quantum noise"
+      },
+      {
+        "level": 0,
+        "text": "Occurs due to variations in number of photons incident"
+      },
+      {
+        "level": 0,
+        "text": "Randomness forms a Poisson distribution"
+      },
+      {
+        "level": 0,
+        "text": "https://en.wikipedia.org/wiki/Shot_noise#"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_05_img_2.jpg"
+    ]
+  },
+  {
+    "slide": 6,
+    "title": "Gaussian Noise Removal",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Gaussian Noise Removal"
+      },
+      {
+        "level": 0,
+        "text": "To remove gaussian noise, we can use two filters"
+      },
+      {
+        "level": 1,
+        "text": "Box Filter"
+      },
+      {
+        "level": 1,
+        "text": "Gaussian Filter"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_06_img_2.png"
+    ]
+  },
+  {
+    "slide": 7,
+    "title": "Box Filter",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Box Filter"
+      },
+      {
+        "level": 0,
+        "text": "https://en.wikipedia.org/wiki/Box_blur"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_07_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_07_img_3.png"
+    ]
+  },
+  {
+    "slide": 8,
+    "title": "Gaussian Filter",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Gaussian Filter"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_08_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_08_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_08_img_3.png"
+    ]
+  },
+  {
+    "slide": 9,
+    "title": "Salt and Pepper Noise Removal",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Salt and Pepper Noise Removal"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_09_img_1.png"
+    ]
+  },
+  {
+    "slide": 10,
+    "title": "Median Filtering",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Median Filtering"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_10_img_1.png"
+    ]
+  },
+  {
+    "slide": 11,
+    "title": "Fourier Transform in 1D (Time domain)",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform in 1D (Time domain)"
+      },
+      {
+        "level": 0,
+        "text": "Transform a signal from the time domain to frequency domain"
+      },
+      {
+        "level": 0,
+        "text": "Gives the ability to view which frequencies dominate and which don\u2019t"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_11_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_11_img_2.png"
+    ]
+  },
+  {
+    "slide": 12,
+    "title": "The Frequency Perspective in 2D Vision",
+    "texts": [
+      {
+        "level": 0,
+        "text": "The Frequency Perspective in 2D Vision"
+      },
+      {
+        "level": 0,
+        "text": "The 2D Fourier Transform decomposes an image into a weighted sum of sinusoidal plane waves."
+      },
+      {
+        "level": 0,
+        "text": "It shifts our perspective from where a intensity is (Spatial Domain) to how fast intensities change (Frequency Domain)."
+      },
+      {
+        "level": 0,
+        "text": "To move from intensity f(x, y) to frequencies F(u,v), we use the"
+      },
+      {
+        "level": 0,
+        "text": "2D Fourier Transform."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_12_img_2.png"
+    ]
+  },
+  {
+    "slide": 13,
+    "title": "Discrete Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Discrete Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "In the physical world, light is continuous. In CV, we sample that light into pixels. This discretization is what forces us to move from the integral to the sum."
+      },
+      {
+        "level": 0,
+        "text": "Example: 8-bit depth maps light intensity into integers from 0 (black) to 255 (white)"
+      },
+      {
+        "level": 0,
+        "text": "To mathematically discretize a continuous image f(x, y), we multiply it by a 2D Impulse Train s(x, y), which acts as a sampling grid of Dirac delta functions."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_13_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_13_img_4.png"
+    ]
+  },
+  {
+    "slide": 14,
+    "title": "Why Frequency domain in 2D?",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Why Frequency domain in 2D?"
+      },
+      {
+        "level": 0,
+        "text": "This forms a core pillar of classical computer vision"
+      },
+      {
+        "level": 0,
+        "text": "Anti-Aliasing: Prevents artifacts (Moir\u00e9 patterns) by removing high frequencies before downsampling."
+      },
+      {
+        "level": 0,
+        "text": "Compression: Enables JPEG by discarding high-frequency \"noise\" the human eye can't perceive."
+      },
+      {
+        "level": 0,
+        "text": "Efficiency: The Convolution Theorem turns expensive spatial filtering into fast, pointwise multiplication."
+      },
+      {
+        "level": 0,
+        "text": "Denoising: Allows for precise removal of periodic patterns or \"grid noise\" from sensors."
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  },
+  {
+    "slide": 15,
+    "title": "2D Fourier Basis",
+    "texts": [
+      {
+        "level": 0,
+        "text": "2D Fourier Basis"
+      },
+      {
+        "level": 0,
+        "text": "The 2D DFT represents an image as a sum of complex exponentials:"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_15_img_3.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_15_img_4.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_15_img_5.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_15_img_6.png"
+    ]
+  },
+  {
+    "slide": 16,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Linearity:"
+      },
+      {
+        "level": 0,
+        "text": "The transform of a weighted sum of images is the weighted sum of their individual transforms."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_16_img_2.png"
+    ]
+  },
+  {
+    "slide": 17,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Separability:"
+      },
+      {
+        "level": 0,
+        "text": "The 2D transform can be computed by performing 1D transforms along the rows, followed by 1D transforms along the columns."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_17_img_2.png"
+    ]
+  },
+  {
+    "slide": 18,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Translation (Spatial Shift):"
+      },
+      {
+        "level": 0,
+        "text": "Shifting an image in the spatial domain only changes the phase in the frequency domain; the magnitude remains identical."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_18_img_2.png"
+    ]
+  },
+  {
+    "slide": 19,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Scaling:"
+      },
+      {
+        "level": 0,
+        "text": "Stretching an image in the spatial domain leads to a reciprocal \"shrinking\" in the frequency domain."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_19_img_2.png"
+    ]
+  },
+  {
+    "slide": 20,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Conjugate Symmetry"
+      },
+      {
+        "level": 0,
+        "text": "For any real-valued image f(x, y) (which describes almost all standard digital images), the Fourier Transform is Hermitian symmetric."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_20_img_2.png"
+    ]
+  },
+  {
+    "slide": 21,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Rotation:"
+      },
+      {
+        "level": 0,
+        "text": "If an image is rotated by an angle in the spatial domain, its frequency spectrum F(u, v) rotates by the exact same angle in the frequency domain."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_21_img_2.png"
+    ]
+  },
+  {
+    "slide": 22,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "The Discrete Fourier Transform (DFT) and its inverse are infinitely periodic in both the u and v directions."
+      },
+      {
+        "level": 0,
+        "text": "This means the transform repeats itself every M units horizontally and N units vertically."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_22_img_3.png"
+    ]
+  },
+  {
+    "slide": 23,
+    "title": "Edge Discontinuity",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Edge Discontinuity"
+      },
+      {
+        "level": 0,
+        "text": "Since DFT mathematically assumes that your image is one \"tile\" in an infinitely repeating 2D mosaic."
+      },
+      {
+        "level": 0,
+        "text": "In real images, the left edge rarely matches the right edge. When the DFT \"tiles\" the image, a sharp intensity jump (discontinuity) occurs at every boundary."
+      },
+      {
+        "level": 0,
+        "text": "This manifests as a bright \"Spectral Cross\" (horizontal and vertical lines) through the center of your frequency plot."
+      },
+      {
+        "level": 0,
+        "text": "We multiply the image by a Window Function w(x,y) that smoothly tapers the pixel values to zero as they approach the edges. This makes the tiled transition seamless."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_23_img_4.png"
+    ]
+  },
+  {
+    "slide": 24,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Convolution Theorem"
+      },
+      {
+        "level": 0,
+        "text": "Spatial convolution is equivalent to element-wise multiplication in the frequency domain. This is the basis for fast filtering in CV."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_24_img_2.png"
+    ]
+  },
+  {
+    "slide": 25,
+    "title": "Wrap-around (Ghosting)",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Wrap-around (Ghosting)"
+      },
+      {
+        "level": 0,
+        "text": "Because the DFT assumes the image is periodic, the Convolution Theorem performs Circular Convolution."
+      },
+      {
+        "level": 0,
+        "text": "If you apply a filter (like a blur) without enough space, pixels that \"exit\" the right side of the image frame will mathematically \"wrap around\" and bleed into the left side."
+      },
+      {
+        "level": 0,
+        "text": "To achieve Linear Convolution (standard filtering), we must pad the image with a border of zeros. This provides a \"buffer zone\" that prevents the filter from interacting with the periodic copies of the image."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_25_img_3.png"
+    ]
+  },
+  {
+    "slide": 26,
+    "title": "The Inverse 2D DFT (IFT)",
+    "texts": [
+      {
+        "level": 0,
+        "text": "The Inverse 2D DFT (IFT)"
+      },
+      {
+        "level": 0,
+        "text": "To reconstruct the spatial image f(x, y) from its frequency coefficients F(u,v), we sum the weighted basis functions:"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_26_img_2.png"
+    ]
+  },
+  {
+    "slide": 27,
+    "title": "The Differentiation Property",
+    "texts": [
+      {
+        "level": 0,
+        "text": "The Differentiation Property"
+      },
+      {
+        "level": 0,
+        "text": "Differentiating in the spatial domain corresponds to multiplying by the frequency variable in the frequency domain."
+      },
+      {
+        "level": 0,
+        "text": "Spatial Derivative: Finding the rate of change of pixel intensities."
+      },
+      {
+        "level": 0,
+        "text": "Frequency Equivalent: Multiplying by a ramp function."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_27_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_27_img_3.png"
+    ]
+  },
+  {
+    "slide": 28,
+    "title": "Computational cost of DFT",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Computational cost of DFT"
+      },
+      {
+        "level": 0,
+        "text": "The standard DFT is a \"brute force\" approach."
+      },
+      {
+        "level": 0,
+        "text": "To find the value of just one frequency point (u,v), the algorithm must sum up the contributions from every single pixel in the original N x N image."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_28_img_2.png"
+    ]
+  },
+  {
+    "slide": 29,
+    "title": "Fast Fourier Transform (FFT)",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fast Fourier Transform (FFT)"
+      },
+      {
+        "level": 0,
+        "text": "The 2D Fast Fourier Transform (FFT) is an optimized algorithm for computing the Discrete Fourier Transform (DFT)."
+      },
+      {
+        "level": 0,
+        "text": "It treats a 2D grid as a series of separable 1D transforms, exploiting the symmetry and periodicity of complex exponentials to eliminate redundant calculations."
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_29_img_2.png"
+    ]
+  },
+  {
+    "slide": 30,
+    "title": "2D FFT to 1D FFT",
+    "texts": [
+      {
+        "level": 0,
+        "text": "2D FFT to 1D FFT"
+      },
+      {
+        "level": 0,
+        "text": "Row-Column Decomposition using the  Separability Equation"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_30_img_1.png"
+    ]
+  },
+  {
+    "slide": 31,
+    "title": "1D FFT",
+    "texts": [
+      {
+        "level": 0,
+        "text": "1D FFT"
+      },
+      {
+        "level": 0,
+        "text": "The 1D FFT is a \"Divide and Conquer\" algorithm that reduces complexity from O(N^2) to O(N log N)."
+      },
+      {
+        "level": 0,
+        "text": "It splits the data into Even and Odd samples, solves them as smaller sub-problems, and then recombines them."
+      },
+      {
+        "level": 0,
+        "text": "This efficiency relies on the Symmetry and Periodicity of the \"Twiddle Factor,\" which allows the algorithm to reuse previous calculations instead of repeating."
+      },
+      {
+        "level": 0,
+        "text": "1D FFT Equation"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_31_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_31_img_3.png"
+    ]
+  },
+  {
+    "slide": 32,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      },
+      {
+        "level": 0,
+        "text": "https://www.cs.toronto.edu/~jepson/csc320/notes/linearFilters2.pdf"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_32_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_32_img_3.png"
+    ]
+  },
+  {
+    "slide": 33,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_33_img_1.png"
+    ]
+  },
+  {
+    "slide": 34,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_34_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_34_img_2.png"
+    ]
+  },
+  {
+    "slide": 35,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_35_img_1.png"
+    ]
+  },
+  {
+    "slide": 36,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_36_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_36_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_36_img_3.png"
+    ]
+  },
+  {
+    "slide": 37,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_37_img_1.png"
+    ]
+  },
+  {
+    "slide": 38,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_38_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_38_img_2.png"
+    ]
+  },
+  {
+    "slide": 39,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_39_img_1.png"
+    ]
+  },
+  {
+    "slide": 40,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_40_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_40_img_2.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_40_img_3.png"
+    ]
+  },
+  {
+    "slide": 41,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_41_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_41_img_2.png"
+    ]
+  },
+  {
+    "slide": 42,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_42_img_1.png"
+    ]
+  },
+  {
+    "slide": 43,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_43_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_43_img_2.png"
+    ]
+  },
+  {
+    "slide": 44,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_44_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_44_img_2.png"
+    ]
+  },
+  {
+    "slide": 45,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_45_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_45_img_2.png"
+    ]
+  },
+  {
+    "slide": 46,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_46_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_46_img_2.png"
+    ]
+  },
+  {
+    "slide": 47,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_47_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_47_img_2.png"
+    ]
+  },
+  {
+    "slide": 48,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_48_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_48_img_2.png"
+    ]
+  },
+  {
+    "slide": 49,
+    "title": "Fourier Transform for Images",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Images"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_49_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_49_img_2.png"
+    ]
+  },
+  {
+    "slide": 50,
+    "title": "Fourier Transform for Filters",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Filters"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_50_img_1.png"
+    ]
+  },
+  {
+    "slide": 51,
+    "title": "Fourier Transform for Filters",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Fourier Transform for Filters"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_51_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_51_img_2.png"
+    ]
+  },
+  {
+    "slide": 52,
+    "title": "Filtering Operation",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Filtering Operation"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_52_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_52_img_2.png"
+    ]
+  },
+  {
+    "slide": 53,
+    "title": "Filtering Operation",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Filtering Operation"
+      },
+      {
+        "level": 0,
+        "text": "Inverse Fourier Transform"
+      }
+    ],
+    "has_images": true,
+    "image_files": [
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_53_img_1.png",
+      "/home/rishabh/Documents/IITM/CV/Notes/MD/Images/extracted/Image Filtering and Fourier Transform/slide_53_img_3.png"
+    ]
+  },
+  {
+    "slide": 54,
+    "title": "Properties of Fourier Transform",
+    "texts": [
+      {
+        "level": 0,
+        "text": "Properties of Fourier Transform"
+      },
+      {
+        "level": 0,
+        "text": "Properties"
+      }
+    ],
+    "has_images": false,
+    "image_files": []
+  }
+]

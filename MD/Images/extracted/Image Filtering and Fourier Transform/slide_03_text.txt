@@ -1,0 +1,5 @@
+Types of Noises in Images: Salt and Pepper Noise
+Also known as Impulse Noise
+Random white and black pixels scattered across the image
+Source being faulty camera sensors majorly
+https://en.wikipedia.org/wiki/Image_noise

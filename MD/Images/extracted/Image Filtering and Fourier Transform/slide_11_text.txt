@@ -1,0 +1,3 @@
+Fourier Transform in 1D (Time domain)
+Transform a signal from the time domain to frequency domain
+Gives the ability to view which frequencies dominate and which don’t
