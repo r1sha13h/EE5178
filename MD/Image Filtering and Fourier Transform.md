@@ -225,11 +225,14 @@ Differentiating in the spatial domain → multiplying by frequency variable in t
 
 $$\frac{\partial f(x,y)}{\partial x} \iff j2\pi u \cdot F(u,v)$$
 
-*Spatial derivative = ramp multiplication in frequency domain.*
+*Spatial derivative is finding the rate of change is pixel intensity and is equivalent to multiplication by ramp function in frequency domain.*
 
 ---
 
 ## Slides 28–31 — Fast Fourier Transform (FFT)
+
+### Fast Fourier Transform (FFT)
+The 2D Fast Fourier Transform (FFT) is an optimized algorithm for computing the Discrete Fourier Transform (DFT). It treats a 2D grid as a series of separable 1D transforms, exploiting the symmetry and periodicity of complex exponentials to eliminate redundant calculations.
 
 ### Computational Cost of Naïve DFT
 - One frequency point (u, v) requires summing all N×N pixels → **O(N⁴)** for full 2D DFT
