@@ -37,6 +37,9 @@ $$\mathbf{x} = P\mathbf{X}, \qquad \mathbf{x}' = P'\mathbf{X}$$
 Given a point **x** in image 1, the corresponding 3D scene point lies somewhere along the ray back-projected through **x**. This entire ray, projected into image 2, sweeps out a **line** — called the **epipolar line l′**. The corresponding point **x′** must lie somewhere on this line.
 
 **Epipolar constraint:** Reduces correspondence search from 2D → **1D along the epipolar line.**
+
+![Epipolar geometry: the epipolar plane, epipoles, and epipolar line](Images/epipolar_plane.png)
+
 ### 3.2 Key Definitions
 | Term | Definition |
 |---|---|
@@ -46,6 +49,15 @@ Given a point **x** in image 1, the corresponding 3D scene point lies somewhere 
 | **Epipolar line l′** | Line in image 2 corresponding to point **x** in image 1 |
 | **Epipolar plane** | Plane containing C, C′, and the 3D point X — these three points are always coplanar |
 | **Epipolar pencil** | One-parameter family of epipolar planes as X varies; all epipolar lines in each image converge at the epipole |
+
+Equivalently, the epipole **e** is the point of intersection of the line joining the camera centres with the image plane. That line is:
+- the **baseline** for a stereo rig, and
+- the **translation vector** for a moving camera
+
+Algebraically, since the epipole is the image of the other camera's centre:
+
+$$\mathbf{e} = PC', \qquad \mathbf{e}' = P'C$$
+
 ### 3.3 Image Centre vs. Epipole
 These are two different concepts that happen to coincide in one special case:
 
@@ -98,6 +110,12 @@ Rather than tracking a general depth-z point, pick the two most convenient point
 | Camera centre C | $z=0$ | $(\mathbf{0},\,1)^T$ | $\mathbf{p} = K'\mathbf{t}$ — this is the **epipole e′** |
 | Point at infinity | $z=\infty$ | $(K^{-1}\mathbf{x},\,0)^T$ | $\mathbf{q} = K'RK^{-1}\mathbf{x}$ |
 
+Projection into camera 2 is $P'\mathbf{X} = K'[R\,|\,\mathbf{t}]\mathbf{X}$. Applying this to each 3D form:
+
+$$\mathbf{p} = K'[R\,|\,\mathbf{t}]\begin{pmatrix}\mathbf{0}\\1\end{pmatrix} = K'(R\cdot\mathbf{0} + \mathbf{t}) = K'\mathbf{t}$$
+
+$$\mathbf{q} = K'[R\,|\,\mathbf{t}]\begin{pmatrix}K^{-1}\mathbf{x}\\0\end{pmatrix} = K'(RK^{-1}\mathbf{x} + \mathbf{t}\cdot 0) = K'RK^{-1}\mathbf{x}$$
+
 The camera centre of camera 1, viewed from camera 2, is always the epipole — this is the geometric definition of e′. The point at infinity on the ray carries the direction information.
 
 ***
@@ -119,12 +137,13 @@ $$\boxed{F = K'^{-T}[\mathbf{t}]_\times R K^{-1}}$$
 **Pipeline in one line:**
 
 $$\underbrace{\mathbf{x}}_{\text{pixel in cam 1}} \xrightarrow{\;K^{-1}\;} \underbrace{\text{3D ray direction}} \xrightarrow{\;R,\,\mathbf{t}\;} \underbrace{\text{2 projected pts in cam 2}} \xrightarrow{\;\times\;} \underbrace{\mathbf{l}' = F\mathbf{x}}_{\text{epipolar line in cam 2}}$$
+
 ### 4.3 The Cross-Product Matrix
-The vector cross product $\mathbf{v} \times \mathbf{x}$ is equivalent to a matrix multiplication:
+The translation vector **t** from Step 2 appears in F via the cross-product matrix. The vector cross product $\mathbf{t} \times \mathbf{x}$ is equivalent to a matrix multiplication:
 
-$$[\mathbf{v}]_\times = \begin{bmatrix} 0 & -v_3 & v_2 \\ v_3 & 0 & -v_1 \\ -v_2 & v_1 & 0 \end{bmatrix}, \qquad \mathbf{v} \times \mathbf{x} = [\mathbf{v}]_\times \mathbf{x}$$
+$$[\mathbf{t}]_\times = \begin{bmatrix} 0 & -t_3 & t_2 \\ t_3 & 0 & -t_1 \\ -t_2 & t_1 & 0 \end{bmatrix}, \qquad \mathbf{t} \times \mathbf{x} = [\mathbf{t}]_\times \mathbf{x}$$
 
-Key property: $[\mathbf{v}]_\times \mathbf{v} = \mathbf{0}$ (self-annihilation). Also, $\det[\mathbf{v}]_\times = 0$ always — so it is **always rank 2** for any non-zero **v**.
+Key property: $[\mathbf{t}]_\times \mathbf{t} = \mathbf{0}$ (self-annihilation). Also, $\det[\mathbf{t}]_\times = 0$ always — so it is **always rank 2** for any non-zero **t**.
 
 ***
 ## 5. Properties of the Fundamental Matrix
@@ -162,11 +181,11 @@ $$\text{rank}(F) \leq \text{rank}([\mathbf{t}]_\times) = 2$$
 ### 5.4 Why $F\mathbf{e} = \mathbf{0}$ and $F^T\mathbf{e}' = \mathbf{0}$
 **This is not assumed — it is derived from geometry.**
 
-Every epipolar line $\mathbf{l}' = F\mathbf{x}$ passes through **e′** (because every epipolar line in image 2 converges at e′). So:
+For any point **x** (other than **e**), the epipolar line $\mathbf{l}' = F\mathbf{x}$ passes through **e′** (because every epipolar line in image 2 converges at e′). Thus **e′** satisfies:
 
-$$\mathbf{e}'^T \mathbf{l}' = \mathbf{e}'^T (F\mathbf{x}) = 0 \quad \text{for EVERY possible } \mathbf{x}$$
+$$\mathbf{e}'^T(F\mathbf{x}) = (\mathbf{e}'^T F)\mathbf{x} = 0 \quad \text{for EVERY possible } \mathbf{x}$$
 
-The only way a dot product equals zero for **every** possible **x** is if the multiplier is the zero vector:
+The only way $(\mathbf{e}'^T F)\mathbf{x} = 0$ holds for **every** possible **x** is if the row vector itself is zero:
 
 $$\mathbf{e}'^T F = \mathbf{0} \;\implies\; F^T\mathbf{e}' = \mathbf{0}$$
 
@@ -277,14 +296,15 @@ $$\min_{\mathbf{f}} \|A\mathbf{f}\|^2 \quad \text{subject to} \quad \|\mathbf{f}
 $$A = U\Sigma V^T$$
 
 The solution **f** is the **last column of V** — the right singular vector corresponding to the **smallest singular value** of A. This minimises $\|A\mathbf{f}\|^2$ under the unit-norm constraint exactly. Reshape this 9-vector back into a 3×3 matrix to get the raw F.
+
 ### 7.5 The Complete 8-Point Algorithm
 | Step | Action | Why It's Needed |
 |---|---|---|
 | **0. Normalize** | Translate each image's points so centroid = origin; scale so avg distance from origin = √2 | Raw pixel coordinates (e.g. 343, 221) create huge numerical range in A — products like $x_mx_m'$ can be ~100,000 while the last entry is 1 — making A ill-conditioned and SVD unreliable |
 | **1. Build A** | Construct M×9 matrix from normalized point pairs | Encodes all epipolar constraints linearly |
-| **2. SVD of A** | Compute $A = U\Sigma V^T$ | Solves the homogeneous least-squares system |
-| **3. Extract F** | Reshape last column of V into 3×3 → F_raw | Minimises residual $\|A\mathbf{f}\|^2$ |
-| **4. Enforce rank 2** | SVD of F_raw: zero out smallest singular value → $F = U\,\text{diag}(\sigma_1,\sigma_2,0)\,V^T$ | Raw F is generically rank 3 (noise fills the third singular value); true F must be rank 2 |
+| **2. SVD of A** | Compute $A = U\Sigma V^T$ | Solves the homogeneous least-squares system: since U is orthonormal, $\|A\mathbf{f}\|^2 = \|\Sigma V^T\mathbf{f}\|^2$. Setting $\mathbf{g} = V^T\mathbf{f}$ (also unit norm, since V is orthonormal) gives $\sum_i \sigma_i^2 g_i^2$, minimised by putting all weight on the smallest $\sigma_i$ — so $\mathbf{g} = (0,\ldots,0,1)^T$, meaning $\mathbf{f}$ = last column of V |
+| **3. Extract F** | Reshape last column of V into 3×3 → F_raw | Directly follows from Step 2: the minimising $\mathbf{f}$ is the last column of V, reshaped row-by-row into a 3×3 matrix |
+| **4. Enforce rank 2** | SVD of F_raw: zero out smallest singular value → $F = U_F\,\text{diag}(\sigma_1,\sigma_2,0)\,V_F^T$ | Raw F is generically rank 3 (noise fills the third singular value); true F must be rank 2 |
 | **5. Un-normalize** | $F_{\text{final}} = T'^T F_{\text{rank2}} T$ | Converts F back from normalised to original pixel coordinates |
 
 **Why Step 4 gives the best rank-2 approximation:** By the **Eckart–Young theorem**, the best rank-2 approximation to any matrix (in Frobenius norm) is obtained by zeroing the smallest singular value in its SVD. This is mathematically optimal.
@@ -316,8 +336,8 @@ $$\mathbf{e}' = \text{last column of } U \quad (F^T\mathbf{e}' = \mathbf{0} \;\t
 | $\mathbf{l}' = F\mathbf{x}$ | Epipolar line in image 2 for point **x** in image 1 |
 | $\mathbf{l} = F^T\mathbf{x}'$ | Epipolar line in image 1 for point **x′** in image 2 |
 | $F = K'^{-T}[\mathbf{t}]_\times R K^{-1}$ | F computed from known camera matrices |
-| $F\mathbf{e} = \mathbf{0}$ | **e** is the right null vector of F |
-| $F^T\mathbf{e}' = \mathbf{0}$ | **e′** is the left null vector of F |
+| $F\mathbf{e} = \mathbf{0}$ | **e** is the right null vector of F — extracted as the last column of V in the SVD $F = U_F\Sigma_F V_F^T$ |
+| $F^T\mathbf{e}' = \mathbf{0}$ | **e′** is the left null vector of F — extracted as the last column of U in the same SVD |
 ### Properties of F
 - 3×3 matrix, defined **up to scale** (homogeneous)
 - **Rank 2**, determinant = 0
@@ -329,3 +349,37 @@ $$\mathbf{e}' = \text{last column of } U \quad (F^T\mathbf{e}' = \mathbf{0} \;\t
 |---|---|---|---|
 | Parallel (side-by-side) | $\begin{bmatrix}0&0&0\\0&0&-1\\0&1&0\end{bmatrix}$ | At infinity $(1,0,0)^T$ | Horizontal scan lines $y = y'$ |
 | Forward translation | $\begin{bmatrix}0&-1&0\\1&0&0\\0&0&0\end{bmatrix}$ | At image centre $(0,0,1)^T$ | Radial lines from centre |
+
+***
+## 10. Homogeneous Representation of 2D Lines
+A line in 2D is written as $ax + by + c = 0$ and represented as the homogeneous 3-vector $\mathbf{l} = (a, b, c)^T$. This is the same representation used for epipolar lines throughout these notes.
+
+**Example — represent $y = 1$ as a homogeneous vector:**
+
+Rewrite as $-y + 1 = 0$, so $l_1 = 0,\; l_2 = -1,\; l_3 = 1$:
+
+$$\mathbf{l} = (0, -1, 1)^T$$
+
+**Point on a line:**
+
+A point $\mathbf{x}$ lies on line $\mathbf{l}$ if and only if:
+
+$$\mathbf{l} \cdot \mathbf{x} = 0 \qquad \text{equivalently} \qquad \mathbf{l}^T\mathbf{x} = 0 \qquad \text{or} \qquad \mathbf{x}^T\mathbf{l} = 0$$
+
+This is exactly the form of the epipolar constraint $\mathbf{x}'^T(F\mathbf{x}) = 0$ — **x′** lies on the epipolar line $\mathbf{l}' = F\mathbf{x}$.
+
+**Intersection of two lines:**
+
+The intersection point of lines $\mathbf{l}$ and $\mathbf{m}$ is given by their cross product:
+
+$$\mathbf{x} = \mathbf{l} \times \mathbf{m}$$
+
+This is the dual of the fact that the line through two points $\mathbf{x}$ and $\mathbf{y}$ is $\mathbf{l} = \mathbf{x} \times \mathbf{y}$ — used in Step 3 of the F derivation.
+
+**Line as a skew-symmetric matrix:**
+
+The cross product $\mathbf{l} \times \mathbf{m}$ can be written as a matrix multiplication using the skew-symmetric matrix of $\mathbf{l}$:
+
+$$[\mathbf{l}]_\times = \begin{bmatrix} 0 & -l_3 & l_2 \\ l_3 & 0 & -l_1 \\ -l_2 & l_1 & 0 \end{bmatrix}, \qquad \mathbf{x} = \mathbf{l} \times \mathbf{m} = [\mathbf{l}]_\times \mathbf{m}$$
+
+This is the same structure as $[\mathbf{t}]_\times$ in Section 4.3.

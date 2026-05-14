@@ -31,7 +31,9 @@ Large $\sigma$ corresponds to looking at the picture from further away. Small st
 
 ### Why a Stack of Images?
 
-We produce a **family of blurred images** at increasing $\sigma$, forming a continuous scale space. A keypoint appears as an **extremum (peak or valley)** in this stack — at the scale where the feature is most prominent. At any other scale it smoothly fades away.
+A single blur level is not enough: different features come into focus at different $\sigma$. We therefore build a **family of blurred images** at increasing $\sigma$ — a continuous **scale space** $L(x, y, \sigma)$. Each feature has a *characteristic scale* at which it is most prominent and fades away elsewhere; a keypoint will be located as an **extremum across $\sigma$** of a scale-normalised response built from this stack (formalised via the Laplacian / Difference-of-Gaussians in §4).
+
+The remaining question is *how to build the stack efficiently*. The naive recipe — convolve the original image with a sequence of progressively wider Gaussians — turns out to be prohibitively expensive, as the next section quantifies.
 
 ***
 
@@ -39,7 +41,7 @@ We produce a **family of blurred images** at increasing $\sigma$, forming a cont
 
 ### Why Not Just Increase $\sigma$ Directly?
 
-A Gaussian kernel of $\sigma$ requires a physical kernel of size $\approx 6\sigma \times 6\sigma$. Convolution cost scales as $O(\sigma^2 \cdot W \cdot H)$:
+A Gaussian kernel of width $\sigma$ requires a spatial support of size $\approx 6\sigma \times 6\sigma$, so convolution at scale $\sigma$ costs $O(\sigma^2 \cdot W \cdot H)$ operations:
 
 | $\sigma$ | Kernel Size | Operations/pixel |
 |---|---|---|
@@ -54,6 +56,8 @@ Using scales alone is **inefficient and numerically unstable**. The pyramid solv
 > **Blurring a full-resolution image with $\sigma=16$ is mathematically equivalent to blurring a 2× downsampled image with $\sigma=8$.**
 
 When you halve image dimensions, all spatial distances halve, so the same physical scale is represented by half the $\sigma$. Small, cheap kernels on small images do the exact same job as huge kernels on the original — not a compromise, an exact equivalence.
+
+**Aliasing caveat.** Naive 2× subsampling would fold frequencies above the new Nyquist limit back as low-frequency ghosts, creating spurious keypoints. The fix is to **blur before subsampling**: the Gaussian at the seed level already has $\sigma = 2\sigma_0$, wide enough to act as the anti-alias filter that kills everything above the post-downsample Nyquist limit. Subsampling then drops no recoverable information, so the equivalence above remains exact (detailed in *Downsampling: How It Works* below).
 
 ### Octaves
 
@@ -89,6 +93,12 @@ $$ \sigma_i = \sigma_0 \cdot k^i, \quad k = 2^{1/s} $$
 
 Level $s$ has $\sigma = 2\sigma_0$. When downsampled by 2×, the effective $\sigma$ becomes $\sigma_0$ in the new coordinate system — so the next octave starts at the same base scale at half resolution. The pyramid is **seamlessly continuous** across octaves.
 
+**Local vs. absolute $\sigma$.** Inside every octave the *local* $\sigma$ sequence is identical: $\sigma_0 \to 2\sigma_0$ via $\sigma_i = \sigma_0 \cdot k^i$. What changes is the pixel grid — each octave's pixels cover twice the physical distance of the previous one — so in **absolute (original-image) units** the $\sigma$ range *doubles every octave*:
+
+$$\sigma_{\text{abs}}(o, i) \;=\; 2^{o} \cdot \sigma_0 \cdot k^i, \qquad k = 2^{1/s}.$$
+
+The geometric doubling of blur per octave is thus achieved *for free* by subsampling, not by growing kernels — and every octave runs at the same low computational cost.
+
 ### Optimal Number of Octaves
 
 $$ \text{Octaves} = \log_2(\min(W, H)) - C $$
@@ -111,9 +121,11 @@ $$ \text{Octaves} = \log_2(\min(W, H)) - C $$
 
 ### Why DoG?
 
-The Laplacian of Gaussian (LoG) is the ideal blob detector but expensive. DoG approximates it cheaply:
+The Laplacian of Gaussian (LoG) is the ideal blob detector but expensive. DoG approximates it cheaply. From the heat-equation identity $\partial G_\sigma / \partial \sigma = \sigma\, \nabla^2 G_\sigma$, a finite difference between adjacent scales gives
 
-$$ D_i = L(\sigma_{i+1}) - L(\sigma_i) \approx \text{LoG} $$
+$$D_i \;=\; L(\sigma_{i+1}) - L(\sigma_i) \;=\; L(k\sigma_i) - L(\sigma_i) \;\approx\; (k - 1)\,\underbrace{\sigma_i^2\, \nabla^2 G_{\sigma_i} \ast I}_{\text{scale-normalised LoG at } \sigma_i}.$$
+
+So **the DoG between scales $\sigma_i$ and $\sigma_{i+1} = k\sigma_i$ approximates the scale-normalised LoG at the smaller scale $\sigma_i$**, up to the constant factor $(k - 1)$. The constant is the same for every $i$, so it does not affect the location of extrema across $(x, y, \sigma)$ — DoG extrema and LoG extrema coincide.
 
 DoG measures **how much a pixel differs from its surroundings** — large response at blob centers, weak response in flat regions.
 
@@ -150,7 +162,9 @@ for each octave:
 - **Spatial minimum** → bright blob on dark background
 - **Scale extremum** → feature is best explained at this specific $\sigma$
 
-A small blob produces a strong DoG response at small $\sigma$ (Gaussian matches its size); at large $\sigma$ it blurs away → no extremum. Each feature resonates at its own natural scale. Being an extremum in all 26 neighbors means: *spatially distinctive + scale-matched* — exactly what a good keypoint needs.
+A small blob produces a strong DoG response at small $\sigma$ (Gaussian matches its size); at large $\sigma$ it blurs away → no extremum. Each feature resonates at its own natural scale. 
+
+Being an extremum in all 26 neighbors means: *spatially distinctive + scale-matched* — exactly what a good keypoint needs.
 
 ***
 
@@ -220,17 +234,25 @@ Small DoG response → weak feature → unstable and noise-sensitive.
 
 ### 2. Edge Response Rejection
 
-Edges have high gradient in one direction, low in the other → not distinctive, not stable. Use the **2×2 spatial Hessian**:
+Edges have high gradient in one direction, low in the other → not distinctive, not stable. Use the **2×2 spatial Hessian** of the DoG surface at the keypoint:
 
 $$ H = \begin{bmatrix} D_{xx} & D_{xy} \\ D_{yx} & D_{yy} \end{bmatrix} $$
 
-Ratio test (avoids computing eigenvalues directly):
+**Geometric meaning of the eigenvalues.** $\lambda_1, \lambda_2$ of $H$ are the **maximal and minimal principal curvatures** of the DoG surface $D(x, y)$ at that point. Hence:
 
-$$ \frac{(\text{Tr}(H))^2}{\text{Det}(H)} < \frac{(r+1)^2}{r} \quad (r=10\text{ typically}) $$
+- **Edge** — high *maximal* curvature (across the edge), very low *minimal* curvature (along it) ⇒ $\lambda_1 \gg \lambda_2$.
+- **Corner / blob keypoint** — high curvature in *both* principal directions ⇒ $\lambda_1 \approx \lambda_2$, both large.
+
+The ratio test below is therefore a *principal-curvature ratio* test.
+
+Ratio test (avoids computing eigenvalues directly) — the **acceptance** condition:
+
+$$ \frac{(\text{Tr}(H))^2}{\text{Det}(H)} < \frac{(r+1)^2}{r} \;\Rightarrow\; \textbf{Keep}, \qquad \text{else } \textbf{Reject} \quad (r = 10 \text{ typically}). $$
 
 Where $\text{Tr}(H) = \lambda_1 + \lambda_2$, $\text{Det}(H) = \lambda_1\lambda_2$:
-- **Large ratio** → one eigenvalue dominates → edge-like → **reject**
-- **Small ratio** → eigenvalues balanced → corner/blob → **keep**
+
+- **Ratio below threshold** (small) → $\lambda_1 \approx \lambda_2$, eigenvalues balanced → corner / blob → **keep**.
+- **Ratio above threshold** (large) → one $\lambda$ dominates → edge-like → **reject**.
 
 ***
 
@@ -308,7 +330,11 @@ $$ 16 \text{ cells} \times 8 \text{ bins} = 128\text{D vector} $$
 
 $$ \hat{\mathbf{d}} = \frac{\mathbf{d}}{\|\mathbf{d}\|} \Rightarrow \|\hat{\mathbf{d}}\| = 1 $$
 
-Invariant to uniform illumination — if image gets 2× brighter, all $m$ values double, but after dividing by norm the vector is unchanged.
+**Illumination invariance — what this buys and what it doesn't:**
+
+- **Multiplicative ($I \to a I$) — invariant.** All gradient magnitudes $m$ scale by $a$, so $\mathbf{d} \to a\mathbf{d}$, but after $L_2$ normalisation $\hat{\mathbf{d}}$ is unchanged.
+- **Additive ($I \to I + b$) — invariant for free.** The descriptor is built from *gradients*, which kill any constant offset before the histogram is ever formed.
+- **Non-linear illumination (gamma, saturation, shadows) — NOT invariant.** $L_2$ normalisation only undoes a *global scalar* change in intensity. Lowe's fix is to clip each $\hat{d}_i$ at $0.2$ (suppress the few dominant gradients that saturate after non-linear changes) and re-normalise.
 
 ### Why Cells?
 

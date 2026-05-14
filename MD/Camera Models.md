@@ -1,6 +1,5 @@
 # 📷 Camera Models — Complete & Comprehensive Notes
 
-***
 
 ## 1. Why Camera Models Exist
 
@@ -222,15 +221,27 @@ $$
 Distributing $R$:
 
 $$
-= R\tilde{X}_w - R\tilde{C} = R\tilde{X}_w + \mathbf{t}, \quad \text{where } \mathbf{t} = -RC
+\tilde{X}_c = R\tilde{X}_w - R\tilde{C} = R\tilde{X}_w + \mathbf{t}, \quad \mathbf{t} := -R\tilde{C}.
 $$
 
-### In Homogeneous Coordinates (4D)
+### From Vector Form to Matrix Form
 
-Translation + rotation encoded as a **single matrix multiply**:
+**Step 1 — vector form.**
 
 $$
-\begin{bmatrix} X_c \\ Y_c \\ Z_c \\ 1 \end{bmatrix} = \underbrace{\begin{bmatrix} \mathbf{R} & -\mathbf{RC} \\ \mathbf{0}^\top & 1 \end{bmatrix}}_{4\times4 \text{ extrinsic matrix}} \begin{bmatrix} X_w \\ Y_w \\ Z_w \\ 1 \end{bmatrix}
+\tilde X_c \;=\; R\,\tilde X_w + \mathbf{t}.
+$$
+
+**Step 2 — pack $\mathbf{t}$ as a fourth column ⇒ $3\times 4$ extrinsic.**
+
+$$
+\tilde X_c \;=\; \bigl[\,R \mid \mathbf{t}\,\bigr] \begin{bmatrix} \tilde X_w \\ 1 \end{bmatrix}.
+$$
+
+**Step 3 — append $[\mathbf{0}^\top \mid 1]$ ⇒ square $4\times 4$ rigid transform.**
+
+$$
+\begin{bmatrix} \tilde X_c \\ 1 \end{bmatrix} \;=\; \underbrace{\begin{bmatrix} R & \mathbf{t} \\ \mathbf{0}^\top & 1 \end{bmatrix}}_{\text{extrinsic } 4\times 4} \begin{bmatrix} \tilde X_w \\ 1 \end{bmatrix}, \qquad \mathbf{t} = -R\tilde C.
 $$
 
 **Block structure explained:**
@@ -273,13 +284,31 @@ $$
 ### Full Projection Formula
 
 $$
-\mathbf{x} = \underbrace{\mathbf{K}}_{\text{intrinsics}} \underbrace{[\mathbf{I}|\mathbf{0}]}_{\text{projection}} \underbrace{\begin{bmatrix} R & -RC \\ \mathbf{0}^\top & 1 \end{bmatrix}}_{\text{extrinsics}} X_w
+\mathbf{P} \;=\; \underbrace{\begin{bmatrix} f & 0 & p_x \\ 0 & f & p_y \\ 0 & 0 & 1 \end{bmatrix}}_{\substack{\text{intrinsics } (3\times 3) \\ \text{image} \to \text{image}}} \; \underbrace{[\,\mathbf{I} \mid \mathbf{0}\,]}_{\substack{\text{perspective projection } (3\times 4) \\ \text{camera} \to \text{image}}} \; \underbrace{\begin{bmatrix} R & -R\tilde C \\ \mathbf{0}^\top & 1 \end{bmatrix}}_{\substack{\text{extrinsics } (4\times 4) \\ \text{world} \to \text{camera}}}
 $$
 
-Collapsing projection and extrinsics gives the **clean two-matrix form**:
+**Fusing projection and extrinsics.** The middle and right factors multiply cleanly:
 
 $$
-\mathbf{P} = \underbrace{\begin{bmatrix} f & 0 & p_x \\ 0 & f & p_y \\ 0 & 0 & 1 \end{bmatrix}}_{\mathbf{K}\ (3\times3)} \underbrace{\begin{bmatrix} r_1 & r_2 & r_3 & t_1 \\ r_4 & r_5 & r_6 & t_2 \\ r_7 & r_8 & r_9 & t_3 \end{bmatrix}}_{[\mathbf{R}|\mathbf{t}]\ (3\times4)}
+\mathbf{P} \;=\; \mathbf{K}\;\underbrace{[\,\mathbf{I} \mid \mathbf{0}\,]\begin{bmatrix} R & -R\tilde C \\ \mathbf{0}^\top & 1 \end{bmatrix}}_{=\,[\,R \,\mid\, -R\tilde C\,]\,=\,[\,R \,\mid\, \mathbf{t}\,]} \;=\; \mathbf{K}\,[\,R \mid \mathbf{t}\,], \qquad \mathbf{t} = -R\tilde C.
+$$
+
+Factoring $R$ out of $[\,R \mid -R\tilde C\,] = R\,[\,\mathbf{I} \mid -\tilde C\,]$ gives the **center-explicit form**:
+
+$$
+\mathbf{P} \;=\; \mathbf{K}\,R\,[\,\mathbf{I} \mid -\tilde C\,].
+$$
+
+Reading right-to-left, a world point passes through three stages:
+
+- **Extrinsics** — corresponds to camera externals, world to camera transformation.
+- **Perspective projection** — camera to image transformation, projecting 3D to the image plane.
+- **Intrinsics** — corresponds to camera internals.
+
+This collapses the three-matrix chain to the **clean two-matrix form**:
+
+$$
+\mathbf{P} \;=\; \underbrace{\begin{bmatrix} f & 0 & p_x \\ 0 & f & p_y \\ 0 & 0 & 1 \end{bmatrix}}_{\mathbf{K}\ (3\times 3)} \; \underbrace{\begin{bmatrix} r_1 & r_2 & r_3 & t_1 \\ r_4 & r_5 & r_6 & t_2 \\ r_7 & r_8 & r_9 & t_3 \end{bmatrix}}_{[\mathbf{R}\mid\mathbf{t}]\ (3\times 4)} \;=\; \mathbf{K}\,[\,R \mid \mathbf{t}\,].
 $$
 
 ***

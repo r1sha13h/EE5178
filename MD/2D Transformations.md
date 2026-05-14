@@ -133,10 +133,11 @@ Translation **moves the origin** → immediately disqualified from linearity.
 
 ### Why This is Inconvenient
 
-Translation must be written as $x' = Ax + t$. Composing two such transforms:
-$$x'' = A_2(A_1 x + t_1) + t_2 = A_2 A_1 x + A_2 t_1 + t_2$$
+Translation forces the *affine* form $x' = Ax + t$ — a $(A, t)$ pair instead of a single matrix. Composing two such transforms:
 
-You must track the matrix **and** vector separately — messy! Homogeneous coordinates solve this by packing both into a **single 3×3 matrix**.
+$$x'' = A_2(A_1 x + t_1) + t_2 = \underbrace{A_2 A_1}_{\text{clean}}\, x + \underbrace{A_2 t_1 + t_2}_{\text{coupled}}$$
+
+Two asymmetric update rules: the new matrix is just $A_2 A_1$, but the new translation **mixes** $t_1$ with $A_2$ before adding $t_2$. You must track matrix and vector separately and apply different formulas to each — no longer a single matrix-multiplication machine. Homogeneous coordinates fix this by packing $(A, t)$ into one **3×3 matrix**, so ordinary matrix multiplication reproduces the coupled rule automatically.
 
 ***
 
@@ -165,11 +166,18 @@ $(x, y, w) \sim (\lambda x, \lambda y, \lambda w)$ — all scalar multiples repr
 
 ### General Homogeneous Transform Structure
 
-$$\tilde{x}' = H\tilde{x}$$
+$$\tilde{x}' = H\tilde{x}.$$
 
-Labelled:
+**Block form.** Partition $H$ into the linear $2\times 2$ block $A$, the translation column $t$, and the homogeneous row $[0\ 0\ 1]$:
+
 $$
-\underbrace{\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix}}_{\text{Transformed point}} = \underbrace{\begin{bmatrix} \overbrace{\begin{matrix} a & b \\ c & d \end{matrix}}^{\text{2×2 block } A \text{: rotation, scale, shear}} & \overbrace{\begin{matrix} t_x \\ t_y \end{matrix}}^{\text{translation}} \\ \underbrace{0 \quad 0 \quad 1}_{\text{fixed for affine; free for projective}} \end{bmatrix}}_{H} \underbrace{\begin{bmatrix} x \\ y \\ 1 \end{bmatrix}}_{\text{Original point}}
+H \;=\; \left[\begin{array}{c|c} A & t \\ \hline \mathbf{0}^{\!\top} & 1 \end{array}\right] \;=\; \left[\begin{array}{cc|c} a & b & t_x \\ c & d & t_y \\ \hline 0 & 0 & 1 \end{array}\right].
+$$
+
+**Full transform:**
+
+$$
+\underbrace{\begin{bmatrix} x' \\ y' \\ 1 \end{bmatrix}}_{\tilde{x}'} \;=\; \underbrace{\left[\begin{array}{cc|c} a & b & t_x \\ c & d & t_y \\ \hline 0 & 0 & 1 \end{array}\right]}_{H} \underbrace{\begin{bmatrix} x \\ y \\ 1 \end{bmatrix}}_{\tilde{x}}.
 $$
 
 | Block | Symbol | Size | Role |
@@ -218,6 +226,17 @@ The translation gets **rotated** — the object orbits the origin instead of rot
 
 $$\therefore R \cdot T \neq T \cdot R$$
 
+### When Does Composition Commute?
+
+Composition is commutative only in these cases:
+
+- **Translation ∘ Translation:** $T_1 T_2 = T_2 T_1$.
+- **Rotation ∘ Rotation** (about the origin, i.e. all 2D rotations): $R_\alpha R_\beta = R_{\alpha+\beta} = R_\beta R_\alpha$.
+- **Uniform Scaling ∘ Rotation:** $S_{\text{unif}} R = R S_{\text{unif}}$ (uniform scaling $= sI$ commutes with everything).
+- **Uniform Scaling ∘ Uniform Scaling:** $S_{s_1} S_{s_2} = S_{s_1 s_2}$.
+
+All other combinations are **non-commutative**.
+
 ### Standard SRT Order: Scale → Rotate → Translate
 
 $$M = T \cdot R \cdot S$$
@@ -233,6 +252,8 @@ $$M = \begin{bmatrix} s_x\cos\theta & -s_y\sin\theta & t_x \\ s_x\sin\theta & s_
 ***
 
 ## Part 7: Classification of 2D Transformations
+
+![Classification of 2D transformations — visual effect on a unit square](Images/2d_transforms.png)
 
 ### Degrees of Freedom (DOF)
 
@@ -431,14 +452,15 @@ This is **least squares minimization** — find parameters $p$ that minimize tot
 ### Full Pipeline
 
 ```
-Original Image  →  Detect features (x_i)  [SIFT, ORB, etc.]
-Warped Image    →  Detect features (x_i')
+Original image  →  Detect features {xᵢ}   [SIFT, ORB, ...]
+Warped image    →  Detect features {xⱼ'}
         ↓
-    Match corresponding feature pairs
+Match:    for each xᵢ, nearest-neighbour over {xⱼ'} by L₂ descriptor distance
+          keep pair iff Lowe ratio  d₁ / d₂ < 0.8        →  correspondences (xᵢ, xᵢ')
         ↓
-    Solve: min_p Σ ||x_i' - f(x_i; p)||²
+Solve:    p̂ = argmin_p  Σᵢ ‖ xᵢ' − f(xᵢ; p) ‖²        (closed-form / DLT + RANSAC)
         ↓
-    Output: transformation matrix H (or M)
+Output:   transformation matrix H (or M)
 ```
 
 ### Points Needed
@@ -461,13 +483,16 @@ Use **RANSAC** to robustly discard outlier matches.
 
 ## Part 10: Master Summary Table
 
-| Transform | Matrix | DOF | Preserves | Bottom Row |
-|---|---|---|---|---|
-| Translation | $\begin{bmatrix}1&0&t_x\\0&1&t_y\\0&0&1\end{bmatrix}$ | 2 | Everything | $[0\ 0\ 1]$ fixed |
-| Euclidean | $\begin{bmatrix}\cos\theta&-\sin\theta&t_x\\\sin\theta&\cos\theta&t_y\\0&0&1\end{bmatrix}$ | 3 | Distances, angles | $[0\ 0\ 1]$ fixed |
-| Similarity | $\begin{bmatrix}s\cos\theta&-s\sin\theta&t_x\\s\sin\theta&s\cos\theta&t_y\\0&0&1\end{bmatrix}$ | 4 | Angles, ratios | $[0\ 0\ 1]$ fixed |
-| Affine | $\begin{bmatrix}a&b&t_x\\c&d&t_y\\0&0&1\end{bmatrix}$ | 6 | Lines, parallelism, ratios | $[0\ 0\ 1]$ fixed |
-| Projective | $\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix}$ | 8 | Lines only | $[g\ h\ i]$ **free** |
+| Transform | Matrix | DOF | Preserves | Violates | Bottom Row |
+|---|---|---|---|---|---|
+| Linear (origin-fixed) | $\begin{bmatrix}a&b&0\\c&d&0\\0&0&1\end{bmatrix}$ | 4 | **Origin** $(0,0)\!\to\!(0,0)$, lines, parallelism, ratios on the same line | Distances, angles, areas, orientation (if $\det A < 0$) | $[0\ 0\ 1]$ fixed |
+| Translation | $\begin{bmatrix}1&0&t_x\\0&1&t_y\\0&0&1\end{bmatrix}$ | 2 | **Distances, angles, areas, parallelism, orientation**, lines | Absolute position only | $[0\ 0\ 1]$ fixed |
+| Euclidean (Rigid) | $\begin{bmatrix}\cos\theta&-\sin\theta&t_x\\\sin\theta&\cos\theta&t_y\\0&0&1\end{bmatrix}$ | 3 | **Distances, angles, areas, parallelism, orientation**, lines | Absolute position & absolute orientation only | $[0\ 0\ 1]$ fixed |
+| Similarity | $\begin{bmatrix}s\cos\theta&-s\sin\theta&t_x\\s\sin\theta&s\cos\theta&t_y\\0&0&1\end{bmatrix}$ | 4 | **Angles, ratios of distances** (any pair), parallelism, lines | Absolute distances, absolute areas | $[0\ 0\ 1]$ fixed |
+| Affine | $\begin{bmatrix}a&b&t_x\\c&d&t_y\\0&0&1\end{bmatrix}$ | 6 | **Parallelism, ratios on the same line** (midpoints), ratios of areas, lines | Distances, angles, distance ratios between non-collinear pairs | $[0\ 0\ 1]$ fixed |
+| Projective (Homography) | $\begin{bmatrix}a&b&c\\d&e&f\\g&h&i\end{bmatrix}$ | 8 | **Lines, cross-ratio** of 4 collinear points | Parallelism, midpoints, ratios of areas, distances, angles | $[g\ h\ i]$ **free** |
+
+Properties weaken monotonically down the table: each row preserves a strict *subset* of the row above's invariants (e.g. Similarity drops *absolute* distances but keeps their ratios; Affine drops angles and same-pair distance ratios but keeps the same-line ones; Projective drops parallelism but keeps collinearity).
 
 ***
 

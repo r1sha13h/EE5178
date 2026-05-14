@@ -1,6 +1,5 @@
 # 📚 Image Homographies — Master Notes
 
----
 
 ## 1. Motivation: Panoramas
 
@@ -112,6 +111,17 @@ $$A = \begin{bmatrix} A_1 \\ A_2 \\ \vdots \\ A_n \end{bmatrix} \implies Ah = 0,
 **With minimum 4 points:** A is **8×9** — exactly 1D null space, giving a unique solution up to scale.
 **With $n > 4$ noisy points:** Overdetermined — use least squares.
 
+### Fitting Homographies — Two Regimes
+
+Homography has $9$ parameters, but scale is unobservable ⇒ only $8$ DOF ⇒ minimum $4$ correspondences. Fix the gauge with $\|h\|^2 = 1$ and the fitting problem becomes:
+
+| Regime | Objective |
+|---|---|
+| **Noiseless** ($n = 4$, exact) | $Ah = 0 \quad \text{s.t.} \quad \|h\|^2 = 1$ |
+| **Noisy** ($n > 4$, overdetermined) | $\displaystyle \min_h \|Ah\|^2 \quad \text{s.t.} \quad \|h\|^2 = 1$ |
+
+Both are solved by the **last column of $V$** in $A = U \Sigma V^T$ (proof below).
+
 ### Why Homogeneous Least Squares?
 
 Without a constraint, $h = 0$ trivially satisfies $Ah = 0$ — completely useless. Since $\alpha H \equiv H$ geometrically, we fix the scale with $\|h\| = 1$:
@@ -127,15 +137,21 @@ The $\|h\| = 1$ constraint doesn't add an equation to A — it selects **one rep
 
 ### SVD Solution — Proof
 
-Decompose $A = U\Sigma V^T$. Substitute and let $z = V^Th$:
+SVD: $A = U \Sigma V^T$, with $U, V$ orthogonal and $\Sigma = \mathrm{diag}(\sigma_1 \geq \cdots \geq \sigma_n \geq 0)$. Substitute $z = V^T h$:
 
-$$\|Ah\|^2 = \|U\Sigma V^T h\|^2 = \|\Sigma z\|^2 = \sum_i \sigma_i^2 z_i^2$$
+$$\|Ah\|^2 = \|U \Sigma V^T h\|^2 = \|\Sigma z\|^2 = \sum_{i=1}^{n} \sigma_i^2 z_i^2,$$
 
-Since V is orthogonal, $\|z\| = \|h\| = 1$ — the constraint is preserved. This is a weighted sum of squares with weights $\sigma_i^2$. The minimum is achieved by concentrating all weight on the **smallest singular value**:
+$$\|h\|^2 = \|V z\|^2 = \|z\|^2 = 1 \quad (\text{V orthogonal}).$$
 
-$$z = [0,\ 0,\ \ldots,\ 1]^T \implies h = Vz = \text{last column of } V$$
+Minimise $\sum_i \sigma_i^2 z_i^2$ subject to $\sum_i z_i^2 = 1$ ⇒ concentrate all weight on the smallest $\sigma_i$:
 
-**Uniqueness:** This solution is unique if and only if $\sigma_{n-1} > \sigma_n$ (strictly). With 4 well-distributed, non-collinear points and noiseless data, $\sigma_9 = 0$ exactly (1D null space). With noisy data, $\sigma_9 \approx 0$ and the last column of V gives the best approximation.
+$$z^* = e_n = [0, \ldots, 0, 1]^T \implies h^* = V z^* = v_n \ \ (\text{last column of } V).$$
+
+**Uniqueness:** holds iff $\sigma_{n-1} > \sigma_n$. 
+
+Noiseless 4-point case: $\sigma_9 = 0$ (1D null space). 
+
+Noisy case: $\sigma_9 \approx 0$, $v_9$ is the best approximation.
 
 ### What V Encodes (The Four Fundamental Subspaces)
 
@@ -242,7 +258,10 @@ The sampled 4 define the hypothesis. The full 500 **validate** it. This is why a
 
 ### How Many Iterations?
 
-Let $w$ = probability a randomly chosen point is an inlier, $k$ = points per sample, $p$ = desired success probability.
+- $w$ — probability a randomly chosen point is an inlier.
+- $k$ — points per sample.
+- $p$ — desired success probability.
+- $N$ — number of RANSAC iterations.
 
 $$P(\text{one good trial}) = w^k$$
 $$P(\text{success in N trials}) = 1 - (1-w^k)^N \geq p$$
@@ -262,6 +281,8 @@ Then N is recomputed dynamically — if a high-inlier-ratio model is found early
 | $k$ | $w=90\%$ | $w=80\%$ | $w=70\%$ | $w=60\%$ | $w=50\%$ |
 | --- | --- | --- | --- | --- | --- |
 | **4** | **5** | **9** | **17** | **34** | **72** |
+
+*Reading the table:* with $k=4$ points per sample and an inlier rate $w = 0.90$, only $N = 5$ random trials suffice to be $99\%$ sure ($p = 0.99$) that at least one trial drew an all-inlier sample. As $w$ drops, $N$ grows steeply — at $w = 0.50$ the same guarantee needs $72$ trials.
 
 ---
 

@@ -305,4 +305,4 @@ giving spectral peaks exactly at $\pm A$.
 3. Pointwise multiply: $G(u, v) = F(u, v) \cdot H(u, v)$.
 4. Apply the inverse FFT: $g(x, y) = \mathcal{F}^{-1}\{G(u, v)\}$.
 
-**Example — Gaussian blur.** In the frequency domain, multiply the image spectrum with a Gaussian blob (low-pass). The result suppresses high-frequency details, producing a smooth, blurred image.
+**Example — Gaussian blur** In the frequency domain, multiply the image spectrum with a Gaussian blob (low-pass). The result suppresses high-frequency details, producing a smooth, blurred image.

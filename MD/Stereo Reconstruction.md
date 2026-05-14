@@ -31,6 +31,11 @@ Rectification converts converging camera geometry into equivalent parallel geome
 
 ## 3. Dense Stereo Correspondence
 
+**Problem statement.** Given two images and their associated cameras, compute corresponding image points. Algorithms fall into two types:
+
+1. **Dense** — compute a correspondence at every pixel
+2. **Sparse** — compute correspondences only for features
+
 Dense stereo computes a depth estimate at **every pixel**.
 
 ### Cross-Correlation Matching
@@ -88,6 +93,8 @@ Beyond appearance, geometric priors help resolve ambiguity:
 ## 6. Disparity and Depth
 
 ### The Geometry
+
+![Stereo geometry: 3D point X at depth Z imaged at x and x′ by cameras O, O′ with baseline b and focal length f](Images/stereo_geometry.png)
 
 For a **parallel camera** setup with:
 - Baseline $b$ = distance between camera centres $O$ and $O'$
@@ -158,7 +165,11 @@ The scale factor $\alpha$ prevents direct solving. We eliminate it using the **c
 $$\mathbf{x} \times \mathbf{P}\mathbf{X} = \mathbf{0}$$
 
 #### Expanding with Camera Rows
-Writing $\mathbf{P}$ row-by-row as $\mathbf{p}_1^\top, \mathbf{p}_2^\top, \mathbf{p}_3^\top$:
+Writing $\mathbf{P}$ row-by-row as $\mathbf{p}_1^\top, \mathbf{p}_2^\top, \mathbf{p}_3^\top$ and $\mathbf{x} = (x, y, 1)^T$, expand the cross product $\mathbf{x} \times \mathbf{P}\mathbf{X}$:
+
+$$\begin{bmatrix} x \\ y \\ 1 \end{bmatrix} \times \begin{bmatrix} \mathbf{p}_1^\top \mathbf{X} \\ \mathbf{p}_2^\top \mathbf{X} \\ \mathbf{p}_3^\top \mathbf{X} \end{bmatrix} = \begin{bmatrix} y\mathbf{p}_3^\top \mathbf{X} - \mathbf{p}_2^\top \mathbf{X} \\ \mathbf{p}_1^\top \mathbf{X} - x\mathbf{p}_3^\top \mathbf{X} \\ x\mathbf{p}_2^\top \mathbf{X} - y\mathbf{p}_1^\top \mathbf{X} \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}$$
+
+Factor $\mathbf{X}$ out (each $\mathbf{p}_i^\top \mathbf{X}$ is linear in $\mathbf{X}$):
 
 $$\begin{bmatrix} y\mathbf{p}_3^\top - \mathbf{p}_2^\top \\ \mathbf{p}_1^\top - x\mathbf{p}_3^\top \\ x\mathbf{p}_2^\top - y\mathbf{p}_1^\top \end{bmatrix}\mathbf{X} = \mathbf{0}$$
 
@@ -171,10 +182,9 @@ $$\underbrace{\begin{bmatrix} y\mathbf{p}_3^\top - \mathbf{p}_2^\top \\ \mathbf{
 #### Solving: SVD
 Decompose $\mathbf{A} = \mathbf{U\Sigma V}^\top$. The solution is the **last column of $\mathbf{V}$** — the right singular vector corresponding to the smallest singular value. This minimizes $\|\mathbf{AX}\|^2$ subject to $\|\mathbf{X}\|=1$.
 
-#### Backprojection (How to Compute the Ray)
-Two points define the ray from camera $\mathbf{P}$ through image point $\mathbf{x}$:
-1. Camera centre $C$ — null space of $\mathbf{P}$: $\mathbf{PC} = \mathbf{0}$
-2. $\mathbf{P}^+\mathbf{x}$ — pseudo-inverse of $\mathbf{P}$ applied to $\mathbf{x}$; projects back to $\mathbf{x}$ by definition
+
+1. **Camera centre $C$** — null space of $\mathbf{P}$: $\mathbf{PC} = \mathbf{0}$
+2. **$\mathbf{P}^+\mathbf{x}$** — apply the pseudo-inverse of $\mathbf{P}$ to $\mathbf{x}$; projects back to $\mathbf{x}$ by definition
 
 ### Method 3 — Geometric / MLE (Optimal Method)
 
@@ -187,11 +197,6 @@ If measurement noise is Gaussian $\sim \mathcal{N}(0, \sigma^2)$, then:
 $$p(\mathbf{x} \mid \hat{\mathbf{x}}) \propto \exp\!\left(-\frac{d(\mathbf{x}, \hat{\mathbf{x}})^2}{2\sigma^2}\right)$$
 
 $$\min_{\hat{\mathbf{X}}} \ \mathcal{C}(\mathbf{x}, \mathbf{x}') = d(\mathbf{x}, \hat{\mathbf{x}})^2 + d(\mathbf{x}', \hat{\mathbf{x}}')^2$$
-
-#### Statistical Justification
-If measurement noise is Gaussian $\sim \mathcal{N}(0, \sigma^2)$, then:
-$$p(\mathbf{x} \mid \hat{\mathbf{x}}) \propto \exp\!\left(-\frac{d(\mathbf{x}, \hat{\mathbf{x}})^2}{2\sigma^2}\right)$$
-Maximizing likelihood = minimizing reprojection error → **this is the Maximum Likelihood Estimate (MLE)** of $\mathbf{X}$. This is why reprojection error is the standard loss function throughout computer vision — it's not arbitrary, it's statistically principled.
 
 #### Reduces to 1D Optimization
 Although $\hat{\mathbf{X}}$ has 3 unknowns $[X, Y, Z]$, the constraint that $\hat{\mathbf{x}}$ and $\hat{\mathbf{x}}'$ must lie on corresponding epipolar lines reduces the search to a single scalar parameter $t$ — yielding a closed-form polynomial root-finding solution (Hartley & Sturm, 1997).
